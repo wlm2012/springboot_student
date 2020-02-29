@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.demo.mapper.StudentMapper">
+    <resultMap id="BaseResultMap" type="com.example.demo.entity.Student">
+        <id column="code" property="code" jdbcType="INTEGER"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="banji" property="banji" jdbcType="VARCHAR"/>
+        <result column="nianji" property="nianji" jdbcType="VARCHAR"/>
+    </resultMap>
+    <select id="findStudentByBanji" resultMap="BaseResultMap">
+       select * from t_student where banji = #{banji,jdbcType=VARCHAR};
+    </select>
+
+<!--    <select id="findStudentByBanji" resultMap="BaseResultMap" >-->
+<!--       select * from t_student ;-->
+<!--    </select>-->
+
+</mapper>

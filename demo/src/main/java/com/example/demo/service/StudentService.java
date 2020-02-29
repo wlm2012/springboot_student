@@ -1,6 +1,8 @@
 package com.example.demo.service;
 
 import com.example.demo.entity.Student;
+import com.example.demo.mapper.StudentMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -13,9 +15,11 @@ import java.util.List;
 @Service
 public class StudentService {
 
+    @Autowired
+    private StudentMapper studentMapper;
 
-    public List<Student> listStudent() {
-        var student = new ArrayList<Student>();
+    public List<Student> listStudent(String banji) {
+        var student=studentMapper.findStudentByBanji(banji);
         return student;
     }
 }
