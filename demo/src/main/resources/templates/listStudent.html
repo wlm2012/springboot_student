@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>学生列表</title>
+</head>
+<div>
+    <form id="ListStudent">
+        班级：<input type="text" name="banji" size="20">
+        <input type="button" value="查询" onclick="upload()">
+        <br>
+    </form>
+
+    <div id="Result" style="margin: 0px 0 0px 45%;"></div>
+</div>
+</body>
+
+<script>
+    function upload() {
+        $.ajax({
+            type: "POST",
+            url: "ListStudent",
+            data: $('#ListStudent').serialize(),
+            dataType: "json",//类型
+            success: function (msg) {
+
+                var html = "<table border='1'><tr><td>姓名</td><td>年级</td><td>班级</td><td>修改</td><td>删除</td></tr>";
+                for (var i = 0; i < msg.length; i++) {    //遍历data数组
+                    var ls = msg[i];
+                    html += "<tr><td>" + ls.name + "</td><td>" + ls.nianji + "</td><td>" + ls.banji + "</td><td>" + "修改" + "</td><td>"+"删除"+"</td>";
+                }
+                html += "</tr></table>";
+                $("#Result").html(html);
+            },
+            error: function () {
+                alert("加载资源失败");
+            }
+        });
+    }
+</script>
+</html>

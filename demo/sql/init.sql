@@ -51,3 +51,6 @@ CREATE TABLE `t_chengji` (
   `chengji` varchar(3) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+ALTER TABLE student.t_chengji ADD daan varchar(1000) NULL;
+
+
