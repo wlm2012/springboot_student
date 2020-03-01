@@ -18,8 +18,8 @@ public class StudentService {
     @Autowired
     private StudentMapper studentMapper;
 
-    public List<Student> listStudent(String banji) {
-        var student=studentMapper.findStudentByBanji(banji);
+    public List<Student> listStudent(String clazz) {
+        var student=studentMapper.findStudentByClazz(clazz);
         return student;
     }
 }

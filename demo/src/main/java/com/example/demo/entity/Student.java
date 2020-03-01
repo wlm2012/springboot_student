@@ -9,8 +9,9 @@ import lombok.Data;
 @Data
 public class Student {
 
-    private String code;
+    private String id;
     private String name;
-    private String nianji;
-    private String banji;
+    private String grade;
+    private String clazz;
+    private String clazz_id;
 }

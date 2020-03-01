@@ -16,5 +16,4 @@ public class HtmlController {
         return "listStudent";
     }
 
-
 }

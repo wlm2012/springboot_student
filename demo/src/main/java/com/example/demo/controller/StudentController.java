@@ -20,8 +20,14 @@ public class StudentController {
     private StudentService studentService;
 
     @RequestMapping("/ListStudent")
-    public List<Student> listStudent(String banji){
-        return studentService.listStudent(banji);
+    public List<Student> listStudent(String clazz){
+        return studentService.listStudent(clazz);
+    }
+
+
+    @RequestMapping("/DeleteStudent")
+    public void deleteStudent(int id){
+        System.out.println(id);
     }
 
 

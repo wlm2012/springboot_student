@@ -12,5 +12,5 @@ import java.util.List;
 @Mapper
 public interface StudentMapper {
 
-    List<Student> findStudentByBanji(String banji);
+    List<Student> findStudentByClazz(String clazz);
 }
