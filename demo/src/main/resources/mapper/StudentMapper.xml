@@ -9,12 +9,16 @@
         <result column="clazz_id" property="clazz_id" jdbcType="INTEGER"/>
     </resultMap>
     <select id="findStudentByClazz" resultMap="BaseResultMap">
-       select * from t_student where clazz = #{clazz,jdbcType=VARCHAR};
+       select * from t_student where clazz = #{clazz,jdbcType=VARCHAR} and grade= #{grade,jdbcType=VARCHAR};
     </select>
 
+    <delete id="deleteStudentById" parameterType="int">
+        delete from t_student where id = #{id,jdbcType=INTEGER};
+    </delete>
 
-<!--    <select id="findStudentByBanji" resultMap="BaseResultMap" >-->
-<!--       select * from t_student ;-->
-<!--    </select>-->
+
+    <!--    <select id="findStudentByBanji" resultMap="BaseResultMap" >-->
+    <!--       select * from t_student ;-->
+    <!--    </select>-->
 
 </mapper>

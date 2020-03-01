@@ -4,18 +4,18 @@
     <meta charset="UTF-8">
     <link href="./left.css" type="text/css" rel="stylesheet"/>
     <title>学生列表</title>
+    <div>
+        <form id="ListStudent">
+            年级：<input type="text" name="grade" size="20">
+            班级：<input type="text" name="clazz" size="20">
+            <input type="button" value="查询" onclick="upload()">
+            <br>
+        </form>
+        <a href="http://127.0.0.1:8080/addStudent">添加新学生</a>
+    </div>
 </head>
-<div>
-    <form id="ListStudent">
-        班级：<input type="text" name="clazz" size="20">
-        <input type="button" value="查询" onclick="upload()">
-        <br>
-    </form>
 
-
-</div>
-</body>
-
+<body>
 <div class="parent">
     <div class="left">
         <p>left</p>
@@ -26,6 +26,7 @@
         </p>
     </div>
 </div>
+</body>
 <script type="text/javascript"
         src="webjars/jquery/3.4.1/jquery.min.js"></script>
 <script>
@@ -37,12 +38,10 @@
             dataType: "json",//类型
             success: function (msg) {
 
-                var html = "<table border='1'><tr><td>姓名</td><td>年级</td><td>班级</td><td>修改</td><td>删除</td></tr>";
+                var html = "<table id='myTable' border='1'><tr><td>姓名</td><td>年级</td><td>班级</td><td>修改</td><td>删除</td></tr>";
                 for (var i = 0; i < msg.length; i++) {    //遍历data数组
                     var ls = msg[i];
-                    html += "<tr><td>" + ls.name + "</td><td>" + ls.grade + "</td><td>" + ls.clazz + "</td><td>" + "修改" + "</td><td><a click="
-                    removeRow(action, "+ls.id,i+")
-                    ">删除</a></td>";
+                    html += "<tr  ><td>" + ls.name + "</td><td>" + ls.grade + "</td><td>" + ls.clazz + "</td><td>" + "<a href='http://127.0.0.1:8080/modifyStudent?id=" + ls.id + "'>修改</a>" + "</td><td><button onclick='deleteReg(" + ls.id + "," + i + ")'>删除</button></td>";
                 }
                 html += "</tr></table>";
                 $("#Result").html(html);
@@ -54,36 +53,23 @@
     };
 
 
-    function removeRow(action, id, obj) {
-        if (confirm('确定要删除吗？')) {
-            Ext.Ajax.request({
-                url: encodeURI(action),
-                params: {
-                    id: id
-                },
-                success: function (response) {
-                    delrow(obj);
-                    alert("删除成功！");
-                },
-                failure: function (response) {
-                    alert("连接异常或网络中断！");
+    function deleteReg(id, i) {
+        $.ajax({
+            type: 'post',
+            url: 'DeleteStudent',
+            data: {
+                "id": id
+            },
+            success: function (data) {
+                if (data == "success") {
+                    alert("删除成功")
+                    document.getElementById('myTable').deleteRow(i + 1);//主要就是这个删除成功后移除这行数据
                 }
-            });
-        }
+            }
+
+        })
     }
 
-
-    //删除行
-    function delrow(oElement) {
-        //判断响应事件的当前元素
-        //var myEvent = evt?evt:(window.event?window.event:null);
-        //var oElement = myEvent.srcElement ? myEvent.srcElement : myEvent.target;
-        while (oElement.tagName != "TR") { //一直查找获取到为TR的对象
-            oElement = oElement.parentNode;
-        }
-        var oTBody = oElement.parentNode; //取得表格对象
-        oTBody.removeChild(oElement);
-    }
 
 </script>
 </html>

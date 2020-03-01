@@ -20,14 +20,18 @@ public class StudentController {
     private StudentService studentService;
 
     @RequestMapping("/ListStudent")
-    public List<Student> listStudent(String clazz){
-        return studentService.listStudent(clazz);
+    public List<Student> listStudent(String clazz, String grade) {
+        return studentService.listStudent(clazz, grade);
     }
 
 
     @RequestMapping("/DeleteStudent")
-    public void deleteStudent(int id){
-        System.out.println(id);
+    public String deleteStudent(int id) {
+        int result = studentService.deleteStudentById(id);
+        if (1 == result) {
+            return "success";
+        }
+        return "fail";
     }
 
 
