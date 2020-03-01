@@ -11,7 +11,14 @@
             <input type="button" value="查询" onclick="upload()">
             <br>
         </form>
-        <a href="http://127.0.0.1:8080/addStudent">添加新学生</a>
+        <form id="AddStudent">
+            姓名：<input type="text" name="name" size="30">
+            年级：<input type="text" name="grade" size="2">
+            班级：<input type="text" name="clazz" size="3">
+            <input type="button" value="添加学生" onclick="Add()">
+            <br>
+        </form>
+
     </div>
 </head>
 
@@ -69,7 +76,22 @@
 
         })
     }
+</script>
+<script>
+    function Add() {
 
+        $.ajax({
+            type: "POST",
+            url: "AddStudent",
+            data: $('#AddStudent').serialize(),
+            success: function (data) {
+                    alert("添加成功")
+            },
+            error: function () {
+                alert("加载资源失败");
+            }
+        });
+    };
 
 </script>
 </html>

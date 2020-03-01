@@ -6,9 +6,10 @@
     <title>学生列表</title>
     <div>
         <form id="ListStudent">
-            年级：<input type="text" name="grade" size="20">
-            班级：<input type="text" name="clazz" size="20">
-            <input type="button" value="查询" onclick="upload()">
+            姓名：<input type="text" name="name" size="100">
+            年级：<input type="text" name="grade" size="2">
+            班级：<input type="text" name="clazz" size="3">
+            <input type="button" value="" onclick="upload()">
             <br>
         </form>
         <a href="http://127.0.0.1:8080/addStudent">添加新学生</a>
@@ -33,8 +34,8 @@
     function upload() {
         $.ajax({
             type: "POST",
-            url: "ListStudent",
-            data: $('#ListStudent').serialize(),
+            url: "AddStudent",
+            data: $('#AddStudent').serialize(),
             dataType: "json",//类型
             success: function (msg) {
 
@@ -47,7 +48,7 @@
                 $("#Result").html(html);
             },
             error: function () {
-                alert("加载资源失败");
+                alert("添加失败");
             }
         });
     };

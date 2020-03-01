@@ -26,4 +26,8 @@ public class StudentService {
     public int deleteStudentById(int id) {
         return studentMapper.deleteStudentById(id);
     }
+
+    public void insertStudent(Student student){
+        studentMapper.insertStudent(student);
+    }
 }

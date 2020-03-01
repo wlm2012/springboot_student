@@ -6,7 +6,6 @@
         <result column="name" property="name" jdbcType="VARCHAR"/>
         <result column="grade" property="grade" jdbcType="VARCHAR"/>
         <result column="clazz" property="clazz" jdbcType="VARCHAR"/>
-        <result column="clazz_id" property="clazz_id" jdbcType="INTEGER"/>
     </resultMap>
     <select id="findStudentByClazz" resultMap="BaseResultMap">
        select * from t_student where clazz = #{clazz,jdbcType=VARCHAR} and grade= #{grade,jdbcType=VARCHAR};
@@ -15,6 +14,12 @@
     <delete id="deleteStudentById" parameterType="int">
         delete from t_student where id = #{id,jdbcType=INTEGER};
     </delete>
+
+    <insert id="insertStudent" >
+        INSERT INTO student.t_student (name, grade, clazz)
+        VALUES(#{name,jdbcType=VARCHAR}, #{grade,jdbcType=VARCHAR}, #{clazz,jdbcType=VARCHAR});
+
+    </insert>
 
 
     <!--    <select id="findStudentByBanji" resultMap="BaseResultMap" >-->

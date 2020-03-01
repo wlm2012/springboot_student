@@ -15,4 +15,6 @@ public interface StudentMapper {
     List<Student> findStudentByClazz(String clazz,String grade);
 
     int deleteStudentById(int id);
+
+    void insertStudent(Student student);
 }

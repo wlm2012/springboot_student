@@ -17,12 +17,10 @@ public class HtmlController {
         return "listStudent";
     }
 
-    @RequestMapping("/addStudent")
-    public String addStudent(Integer id) {
-        if (id==null){
-            new ModelAndView("redirect:/addStudent?id="+id);
-        }
-        return "addStudent";
+    @RequestMapping("/modifyStudent")
+    public ModelAndView addStudent(int id) {
+        return new ModelAndView("redirect:/modifyStudent?id=" + id);
+
     }
 
 }
