@@ -36,8 +36,4 @@
     </update>
 
 
-    <!--    <select id="findStudentByBanji" resultMap="BaseResultMap" >-->
-    <!--       select * from t_student ;-->
-    <!--    </select>-->
-
 </mapper>
