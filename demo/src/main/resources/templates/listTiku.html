@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="./left.css" type="text/css" rel="stylesheet"/>
+    <title>题库列表</title>
+    <div>
+        <form id="List">
+            科目：<input type="text" name="kemu" size="20">
+            年级：<input type="text" name="grade" size="20">
+            <input type="button" value="查询" onclick="lists()">
+            <br>
+        </form>
+        <form id="Add">
+            问题：<input type="text" name="question" size="30">
+            姓名：<input type="text" name="name" size="30">
+            年级：<input type="text" name="grade" size="2">
+            班级：<input type="text" name="clazz" size="3">
+            <input type="button" value="添加学生" onclick="Add()">
+            <br>
+        </form>
+        <div id="updateForm"></div>
+    </div>
+</head>
+
+<body>
+<div class="parent">
+    <div class="left">
+        <p>left</p>
+    </div>
+    <div class="right">
+        <p>
+        <div id="Result" style="margin: 0px 0 0px 5%;"></div>
+        </p>
+    </div>
+</div>
+</body>
+<script type="text/javascript"
+        src="webjars/jquery/3.4.1/jquery.min.js"></script>
+<script>
+    function lists() {
+        $.ajax({
+            type: "POST",
+            url: "ListTiku",
+            data: $('#List').serialize(),
+            dataType: "json",//类型
+            success: function (msg) {
+
+                var html = "<table id='myTable' border='1'><tr><td>姓名</td><td>年级</td><td>班级</td><td>修改</td><td>删除</td></tr>";
+                for (var i = 0; i < msg.length; i++) {    //遍历data数组
+                    var ls = msg[i];
+                    html += "<tr  ><td>" + ls.name + "</td><td>" + ls.grade + "</td><td>" + ls.clazz + "</td><td><button onclick='updateForm(" + ls.id + "," + "\"" + ls.name + "\"," + ls.grade + "," + ls.clazz + ")'>修改</button></td><td><button onclick='deleteReg(" + ls.id + "," + i + ")'>删除</button></td>";
+                }
+                html += "</tr></table>";
+                $("#Result").html(html);
+            },
+            error: function () {
+                alert("加载资源失败");
+            }
+        });
+    };
+
+
+    function deleteReg(id, i) {
+        $.ajax({
+            type: 'post',
+            url: 'DeleteTiku',
+            data: {
+                "id": id
+            },
+            success: function (data) {
+                if (data == "success") {
+                    alert("删除成功")
+                    document.getElementById('myTable').deleteRow(i + 1);//主要就是这个删除成功后移除这行数据
+                }
+            }
+
+        })
+    }
+</script>
+<script>
+    function Add() {
+
+        $.ajax({
+            type: "POST",
+            url: "AddTiku",
+            data: $('#Add').serialize(),
+            success: function (data) {
+                if (data == "success") {
+                    alert("添加成功");
+                }else {
+                    alert("添加失败");
+                }
+            },
+            error: function () {
+                alert("添加失败");
+            }
+        });
+    };
+
+</script>
+
+
+<script>
+    function updateForm(id, name, grade, clazz) {
+        var html = "<form id='Update'>" +
+            "<input type='hidden' name='id' value='" + id + "'>" +
+            "姓名：<input type='text' name='name' size='30' value='" + name + "'>" +
+            "年级：<input type='text' name='grade' size='2' value='" + grade + "'>" +
+            "班级：<input type='text' name='clazz' size='3' value='" + clazz + "'>" +
+            "<input type='button' value='编辑' onclick='Update()'>" +
+            "<br>" +
+            "</form>";
+
+        $("#updateForm").html(html);
+    };
+
+    function Update() {
+
+        $.ajax({
+            type: "POST",
+            url: "UpdateTiku",
+            data: $('#Update').serialize(),
+            success: function (data) {
+                if (data == "success") {
+                    alert("修改成功");
+                }else {
+                    alert("修改失败");
+                }
+            },
+            error: function () {
+                alert("修改失败");
+            }
+        });
+    };
+
+
+</script>
+</html>

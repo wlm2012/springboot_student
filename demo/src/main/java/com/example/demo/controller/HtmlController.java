@@ -32,6 +32,11 @@ public class HtmlController {
         return "listTeacher";
     }
 
+    @RequestMapping("/listTiku")
+    public String listTiku() {
+        return "listTiku";
+    }
+
 //    @RequestMapping("/modifyStudent")
 //    public ModelAndView addStudent(int id) {
 //        return new ModelAndView("redirect:/modifyStudent?id=" + id);

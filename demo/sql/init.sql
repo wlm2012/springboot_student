@@ -73,13 +73,14 @@ CREATE TABLE `t_teacher_kemu` (
 
 CREATE TABLE `t_tiku` (
                           `id` int(11) NOT NULL AUTO_INCREMENT,
-                          `question` varchar(1000) DEFAULT NULL,
+                          `question` text DEFAULT NULL,
                           `answer` varchar(10) DEFAULT NULL,
                           `kemu` varchar(10) DEFAULT NULL,
                           `grade` varchar(3) DEFAULT NULL,
                           PRIMARY KEY (`id`),
                           KEY `t_tiku_grade_IDX` (`grade`,`kemu`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
 
 
 
