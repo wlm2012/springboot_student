@@ -19,7 +19,7 @@ public class StudentService {
     private StudentMapper studentMapper;
 
     public List<Student> listStudent(String clazz, String grade) {
-        var student = studentMapper.findStudentByClazz(clazz, grade);
+        var student = studentMapper.findStudent(clazz, grade);
         return student;
     }
 

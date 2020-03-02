@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.demo.mapper.ClazzMapper">
+    <resultMap id="BaseResultMap" type="com.example.demo.entity.Clazz">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="grade" property="grade" jdbcType="VARCHAR"/>
+        <result column="clazz" property="clazz" jdbcType="VARCHAR"/>
+    </resultMap>
+    <select id="findClazz" resultMap="BaseResultMap">
+        select * from t_clazz
+        <where>
+            <if test="clazz != null and clazz !=''">
+                and clazz = #{clazz,jdbcType=VARCHAR}
+            </if>
+            <if test="grade != null and grade !=''">
+                and grade= #{grade,jdbcType=VARCHAR}
+            </if>
+        </where>
+    </select>
+
+    <delete id="deleteClazzById" parameterType="int">
+        delete from t_clazz where id = #{id,jdbcType=INTEGER};
+    </delete>
+
+    <insert id="addClazz">
+        INSERT INTO t_clazz ( grade, clazz)
+        VALUES( #{grade,jdbcType=VARCHAR}, #{clazz,jdbcType=VARCHAR});
+
+    </insert>
+
+
+    <update id="updateClazz">
+        update t_clazz set
+        grade=#{grade,jdbcType=VARCHAR},clazz=#{clazz,jdbcType=VARCHAR} where id=#{id,jdbcType=INTEGER};
+    </update>
+
+
+</mapper>

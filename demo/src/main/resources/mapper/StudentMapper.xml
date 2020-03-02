@@ -7,8 +7,16 @@
         <result column="grade" property="grade" jdbcType="VARCHAR"/>
         <result column="clazz" property="clazz" jdbcType="VARCHAR"/>
     </resultMap>
-    <select id="findStudentByClazz" resultMap="BaseResultMap">
-       select * from t_student where clazz = #{clazz,jdbcType=VARCHAR} and grade= #{grade,jdbcType=VARCHAR};
+    <select id="findStudent" resultMap="BaseResultMap">
+        select * from t_student
+        <where>
+            <if test="clazz != null and clazz !=''">
+                and clazz = #{clazz,jdbcType=VARCHAR}
+            </if>
+            <if test="grade != null and grade !=''">
+                and grade= #{grade,jdbcType=VARCHAR}
+            </if>
+        </where>
     </select>
 
     <delete id="deleteStudentById" parameterType="int">

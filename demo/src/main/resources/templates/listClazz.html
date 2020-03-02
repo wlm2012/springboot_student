@@ -3,22 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <link href="./left.css" type="text/css" rel="stylesheet"/>
-    <title>学生列表</title>
+    <title>班级列表</title>
     <div>
-        <form id="List">
+        <form id="ListClazz">
             年级：<input type="text" name="grade" size="20">
             班级：<input type="text" name="clazz" size="20">
-            <input type="button" value="查询" onclick="list()">
+            <input type="button" value="查询" onclick="upload()">
             <br>
         </form>
-        <form id="Add">
-            姓名：<input type="text" name="name" size="30">
+        <form id="AddClazz">
             年级：<input type="text" name="grade" size="2">
             班级：<input type="text" name="clazz" size="3">
-            <input type="button" value="添加学生" onclick="Add()">
+            <input type="button" value="添加班级" onclick="Add()">
             <br>
         </form>
-        <div id="updateForm"></div>
+        <div id="Update"></div>
     </div>
 </head>
 
@@ -37,18 +36,18 @@
 <script type="text/javascript"
         src="webjars/jquery/3.4.1/jquery.min.js"></script>
 <script>
-    function list() {
+    function upload() {
         $.ajax({
             type: "POST",
-            url: "ListStudent",
-            data: $('#List').serialize(),
+            url: "Listclazz",
+            data: $('#ListClazz').serialize(),
             dataType: "json",//类型
             success: function (msg) {
 
-                var html = "<table id='myTable' border='1'><tr><td>姓名</td><td>年级</td><td>班级</td><td>修改</td><td>删除</td></tr>";
+                var html = "<table id='myTable' border='1'><tr><td>年级</td><td>班级</td><td>修改</td><td>删除</td></tr>";
                 for (var i = 0; i < msg.length; i++) {    //遍历data数组
                     var ls = msg[i];
-                    html += "<tr  ><td>" + ls.name + "</td><td>" + ls.grade + "</td><td>" + ls.clazz + "</td><td><button onclick='updateForm(" + ls.id + "," + "\"" + ls.name + "\"," + ls.grade + "," + ls.clazz + ")'>修改</button></td><td><button onclick='deleteReg(" + ls.id + "," + i + ")'>删除</button></td>";
+                    html += "<tr  ><td>" + ls.grade + "</td><td>" + ls.clazz + "</td><td><button onclick='updateForm(" + ls.id + ","  + ls.grade + "," + ls.clazz + ")'>修改</button></td><td><button onclick='deleteReg(" + ls.id + "," + i + ")'>删除</button></td>";
                 }
                 html += "</tr></table>";
                 $("#Result").html(html);
@@ -63,7 +62,7 @@
     function deleteReg(id, i) {
         $.ajax({
             type: 'post',
-            url: 'DeleteStudent',
+            url: 'Deleteclazz',
             data: {
                 "id": id
             },
@@ -82,8 +81,8 @@
 
         $.ajax({
             type: "POST",
-            url: "AddStudent",
-            data: $('#Add').serialize(),
+            url: "Addclazz",
+            data: $('#AddClazz').serialize(),
             success: function (data) {
                 if (data == "success") {
                     alert("添加成功");
@@ -101,25 +100,24 @@
 
 
 <script>
-    function updateForm(id, name, grade, clazz) {
-        var html = "<form id='Update'>" +
+    function updateForm( id, grade, clazz) {
+        var html = "<form id='UpdateClazz'>" +
             "<input type='hidden' name='id' value='" + id + "'>" +
-            "姓名：<input type='text' name='name' size='30' value='" + name + "'>" +
             "年级：<input type='text' name='grade' size='2' value='" + grade + "'>" +
             "班级：<input type='text' name='clazz' size='3' value='" + clazz + "'>" +
             "<input type='button' value='编辑' onclick='Update()'>" +
             "<br>" +
             "</form>";
 
-        $("#updateForm").html(html);
+        $("#Update").html(html);
     };
 
     function Update() {
 
         $.ajax({
             type: "POST",
-            url: "UpdateStudent",
-            data: $('#Update').serialize(),
+            url: "UpdateClazz",
+            data: $('#UpdateClazz').serialize(),
             success: function (data) {
                 if (data == "success") {
                     alert("修改成功");
