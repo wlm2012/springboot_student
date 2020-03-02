@@ -35,9 +35,18 @@ public class StudentController {
     }
 
     @RequestMapping("/AddStudent")
-    public String insertStudent(Student student){
-        studentService.insertStudent(student);
+    public String addStudent(Student student) {
+        studentService.addStudent(student);
         return "success";
+    }
+
+    @RequestMapping("/UpdateStudent")
+    public String updateStudent(Student student) {
+        int result = studentService.updateStudent(student);
+        if (1 == result) {
+            return "success";
+        }
+        return "fail";
     }
 
 

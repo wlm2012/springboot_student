@@ -15,11 +15,17 @@
         delete from t_student where id = #{id,jdbcType=INTEGER};
     </delete>
 
-    <insert id="insertStudent" >
+    <insert id="addStudent">
         INSERT INTO student.t_student (name, grade, clazz)
         VALUES(#{name,jdbcType=VARCHAR}, #{grade,jdbcType=VARCHAR}, #{clazz,jdbcType=VARCHAR});
 
     </insert>
+
+
+    <update id="updateStudent">
+        update t_student set name=#{name,jdbcType=VARCHAR}
+        ,grade=#{grade,jdbcType=VARCHAR},clazz=#{clazz,jdbcType=VARCHAR} where id=#{id,jdbcType=INTEGER};
+    </update>
 
 
     <!--    <select id="findStudentByBanji" resultMap="BaseResultMap" >-->

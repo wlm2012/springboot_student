@@ -19,7 +19,7 @@ public class StudentService {
     private StudentMapper studentMapper;
 
     public List<Student> listStudent(String clazz, String grade) {
-        var student = studentMapper.findStudentByClazz(clazz,grade);
+        var student = studentMapper.findStudentByClazz(clazz, grade);
         return student;
     }
 
@@ -27,7 +27,11 @@ public class StudentService {
         return studentMapper.deleteStudentById(id);
     }
 
-    public void insertStudent(Student student){
-        studentMapper.insertStudent(student);
+    public void addStudent(Student student) {
+        studentMapper.addStudent(student);
+    }
+
+    public int updateStudent(Student student) {
+        return studentMapper.updateStudent(student);
     }
 }
