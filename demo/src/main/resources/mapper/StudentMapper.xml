@@ -24,7 +24,7 @@
     </delete>
 
     <insert id="addStudent">
-        INSERT INTO student.t_student (name, grade, clazz)
+        INSERT INTO t_student (name, grade, clazz)
         VALUES(#{name,jdbcType=VARCHAR}, #{grade,jdbcType=VARCHAR}, #{clazz,jdbcType=VARCHAR});
 
     </insert>

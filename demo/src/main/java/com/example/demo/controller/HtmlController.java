@@ -22,6 +22,11 @@ public class HtmlController {
         return "listClazz";
     }
 
+    @RequestMapping("/listKemu")
+    public String listKemu() {
+        return "listKemu";
+    }
+
 //    @RequestMapping("/modifyStudent")
 //    public ModelAndView addStudent(int id) {
 //        return new ModelAndView("redirect:/modifyStudent?id=" + id);
