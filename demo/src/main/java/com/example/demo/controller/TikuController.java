@@ -36,7 +36,7 @@ public class TikuController {
 
     @RequestMapping("/AddTiku")
     public String addTiku(Tiku Tiku) {
-        String result=TikuService.addTiku(Tiku);
+        String result = TikuService.addTiku(Tiku);
         return result;
     }
 

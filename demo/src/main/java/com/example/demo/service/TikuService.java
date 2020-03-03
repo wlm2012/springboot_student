@@ -61,19 +61,19 @@ public class TikuService {
         } else {
             var kemus = kemuMapper.findKemu(kemu);
             if (kemus.isEmpty()) {
-                result="没有相应科目";
+                result = "没有相应科目";
             }
         }
 
         if (StringUtil.isEmpty(grade)) {
             result = "年级不能为空";
         } else {
-            var clazzes = clazzMapper.findClazz("",grade);
+            var clazzes = clazzMapper.findClazz("", grade);
             if (clazzes.isEmpty()) {
-                result="没有相应年级";
+                result = "没有相应年级";
             }
         }
-        if(result.equals("success")){
+        if (result.equals("success")) {
             TikuMapper.addTiku(Tiku);
         }
 

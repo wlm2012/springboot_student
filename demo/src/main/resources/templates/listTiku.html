@@ -107,11 +107,11 @@
 
 <script>
     function updateForm(id, question, answer, grade, kemu) {
-        var reg=new RegExp("<br>","g");
-        var newstr=question.replace(reg,"\r\n");
+        var reg = new RegExp("<br>", "g");
+        var newstr = question.replace(reg, "\r\n");
         var html = "<form id='Update'>" +
             "<input type='hidden' name='id' value='" + id + "'>" +
-            "问题：<textarea  name='question' rows='3' cols='100' >"+newstr+"</textarea><br>" +
+            "问题：<textarea  name='question' rows='3' cols='100' >" + newstr + "</textarea><br>" +
             "答案：<input type='text' name='answer' size='6' value='" + answer + "'>" +
             "班级：<input type='text' name='grade' size='3' value='" + grade + "'>" +
             "科目：<input type='text' name='kemu' size='10' value='" + kemu + "'>" +
