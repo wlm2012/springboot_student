@@ -17,13 +17,13 @@ CREATE TABLE `t_clazz` (
                            `clazz` varchar(10) DEFAULT NULL,
                            PRIMARY KEY (`id`),
                            KEY `t_clazz_grade_IDX` (`grade`,`clazz`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE `t_kemu` (
                           `id` int(11) NOT NULL AUTO_INCREMENT,
                           `miaoshu` varchar(100) DEFAULT NULL,
                           PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE `t_shijuan` (
                              `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -44,14 +44,14 @@ CREATE TABLE `t_student` (
                              `clazz` varchar(3) DEFAULT NULL,
                              PRIMARY KEY (`id`),
                              KEY `t_student_clazz_IDX` (`clazz`,`grade`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE `t_teacher` (
                              `id` int(11) NOT NULL AUTO_INCREMENT,
                              `name` varchar(40) DEFAULT NULL,
                              `flag` varchar(3) DEFAULT NULL,
                              PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE `t_teacher_clazz` (
                                    `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -75,11 +75,12 @@ CREATE TABLE `t_tiku` (
                           `id` int(11) NOT NULL AUTO_INCREMENT,
                           `question` text DEFAULT NULL,
                           `answer` varchar(10) DEFAULT NULL,
-                          `kemu` varchar(10) DEFAULT NULL,
+                          `kemu` varchar(100) DEFAULT NULL,
                           `grade` varchar(3) DEFAULT NULL,
                           PRIMARY KEY (`id`),
                           KEY `t_tiku_grade_IDX` (`grade`,`kemu`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
+
 
 
 
