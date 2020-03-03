@@ -93,7 +93,7 @@
                 if (data == "success") {
                     alert("添加成功");
                 } else {
-                    alert("添加失败");
+                    alert(data);
                 }
             },
             error: function () {
@@ -107,12 +107,14 @@
 
 <script>
     function updateForm(id, question, answer, grade, kemu) {
+        var reg=new RegExp("<br>","g");
+        var newstr=question.replace(reg,"\r\n");
         var html = "<form id='Update'>" +
             "<input type='hidden' name='id' value='" + id + "'>" +
-            "问题：<textarea  name='question' rows='3' cols='100' value='" + question + "'></textarea><br>" +
-            "答案：<input type='text' name='answer' size='2' value='" + answer + "'>" +
+            "问题：<textarea  name='question' rows='3' cols='100' >"+newstr+"</textarea><br>" +
+            "答案：<input type='text' name='answer' size='6' value='" + answer + "'>" +
             "班级：<input type='text' name='grade' size='3' value='" + grade + "'>" +
-            "班级：<input type='text' name='kemu' size='10' value='" + kemu + "'>" +
+            "科目：<input type='text' name='kemu' size='10' value='" + kemu + "'>" +
             "<input type='button' value='编辑' onclick='Update()'>" +
             "<br>" +
             "</form>";
