@@ -21,6 +21,9 @@
             <if test="kemu != null and kemu !=''">
                 and kemu= #{kemu,jdbcType=VARCHAR}
             </if>
+            <if test="year != null and year !=''">
+                and year= #{year,jdbcType=VARCHAR}
+            </if>
         </where>
     </select>
 

@@ -12,7 +12,7 @@ import java.util.List;
 @Mapper
 public interface ShijuanMapper {
 
-    List<Shijuan> findShijuan(String clazz,String grade,String kemu);
+    List<Shijuan> findShijuan(Shijuan Shijuan);
 
     int deleteShijuanById(int id);
 

@@ -47,6 +47,8 @@ public class HtmlController {
         return "addShijuan";
     }
 
+
+
 //    @RequestMapping("/modifyStudent")
 //    public ModelAndView addStudent(int id) {
 //        return new ModelAndView("redirect:/modifyStudent?id=" + id);

@@ -11,4 +11,5 @@ public class Shijuan {
     private String clazz;
     private String grade;
     private String kemu;
+    private String year;
 }

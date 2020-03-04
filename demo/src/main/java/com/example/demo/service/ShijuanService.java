@@ -18,8 +18,8 @@ public class ShijuanService {
     @Autowired
     private ShijuanMapper ShijuanMapper;
 
-    public List<Shijuan> listShijuan(String clazz, String grade, String kemu) {
-        var Shijuan = ShijuanMapper.findShijuan(clazz, grade, kemu);
+    public List<Shijuan> listShijuan(Shijuan shijuan) {
+        var Shijuan = ShijuanMapper.findShijuan(shijuan);
         return Shijuan;
     }
 

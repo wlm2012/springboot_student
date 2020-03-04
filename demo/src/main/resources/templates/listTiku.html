@@ -54,7 +54,7 @@
                 var html = "<table id='myTable' border='1'><tr><td>问题</td><td>答案</td><td>年级</td><td>科目</td><td>修改</td><td>删除</td></tr>";
                 for (var i = 0; i < msg.length; i++) {    //遍历data数组
                     var ls = msg[i];
-                    html += "<tr  ><td>" + ls.question + "</td><td>" + ls.answer + "</td><td>" + ls.grade + "</td><td>" + ls.kemu + "</td><td><button onclick='updateForm(" + ls.id + "," + "\"" + ls.question + "\",\"" + ls.answer + "\"," + ls.grade + ",\"" + ls.kemu + "\")'>修改</button></td><td><button onclick='deleteReg(" + ls.id + "," + i + ")'>删除</button></td>";
+                    html += "<tr><td>" + ls.question + "</td><td>" + ls.answer + "</td><td>" + ls.grade + "</td><td>" + ls.kemu + "</td><td><button onclick='updateForm(" + ls.id + "," + "\"" + ls.question + "\",\"" + ls.answer + "\"," + ls.grade + ",\"" + ls.kemu + "\")'>修改</button></td><td><button onclick='deleteReg(" + ls.id + "," + i + ")'>删除</button></td>";
                 }
                 html += "</tr></table>";
                 $("#Result").html(html);

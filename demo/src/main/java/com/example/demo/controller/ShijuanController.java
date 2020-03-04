@@ -20,8 +20,8 @@ public class ShijuanController {
     private ShijuanService ShijuanService;
 
     @RequestMapping("/ListShijuan")
-    public List<Shijuan> listShijuan(String clazz, String grade, String kemu) {
-        return ShijuanService.listShijuan(clazz, grade, kemu);
+    public List<Shijuan> listShijuan(Shijuan shijuan) {
+        return ShijuanService.listShijuan(shijuan);
     }
 
 

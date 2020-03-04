@@ -6,15 +6,14 @@
     <title>试卷列表</title>
     <div>
         <form id="List">
-            年级：<input type="text" name="grade" size="10">
-            班级：<input type="text" name="clazz" size="10">
+            年级：<input type="text" name="grade" size="20">
+            班级：<input type="text" name="clazz" size="20">
             科目：<input type="text" name="kemu" size="20">
-            年：<input type="text" name="year" size="10">
+            年：<input type="text" name="year" size="20">
             <input type="button" value="查询" onclick="lists()">
             <br>
         </form>
-        <a href="http://127.0.0.1:8080/addShijuan">添加试卷</a>
-        <br><br>
+        <a href="http://127.0.0.1:8080/addShijuan">添加新试卷</a>
     </div>
 </head>
 
@@ -49,7 +48,7 @@
                 var html = "<table id='myTable' border='1'><tr><td>试卷名</td><td>年级</td><td>班级</td><td>科目</td><td>年</td><td>修改</td><td>删除</td></tr>";
                 for (var i = 0; i < msg.length; i++) {    //遍历data数组
                     var ls = msg[i];
-                    html += "<tr><td>" + ls.name + "</td><td>" + ls.grade + "</td><td>" + ls.clazz + "</td><td>" + ls.kemu + "</td><td>" + ls.year + "</td><td><a href='http://127.0.0.1:8080/updateShijuan'>编辑题目</td><td><button onclick='deleteReg(" + ls.id + "," + i + ")'>删除</button></td>";
+                    html += "<tr><td>" + ls.name + "</td><td>" + ls.grade + "</td><td>" + ls.clazz + "</td><td>" + ls.kemu + "</td><td>" + ls.year + "</td><td><a href='http://127.0.0.1:8080/updateShijuan'>编辑</td><td><button onclick='deleteReg(" + ls.id + "," + i + ")'>删除</button></td>";
                 }
                 html += "</tr></table>";
                 $("#Result").html(html);
@@ -78,6 +77,5 @@
         })
     }
 </script>
-
 
 </html>
