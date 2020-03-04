@@ -37,6 +37,16 @@ public class HtmlController {
         return "listTiku";
     }
 
+    @RequestMapping("/listShijuan")
+    public String listShijuan() {
+        return "listShijuan";
+    }
+
+    @RequestMapping("/addShijuan")
+    public String addShijuan() {
+        return "addShijuan";
+    }
+
 //    @RequestMapping("/modifyStudent")
 //    public ModelAndView addStudent(int id) {
 //        return new ModelAndView("redirect:/modifyStudent?id=" + id);

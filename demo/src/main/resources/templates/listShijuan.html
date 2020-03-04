@@ -3,28 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <link href="./left.css" type="text/css" rel="stylesheet"/>
-    <title>教师列表</title>
+    <title>试卷列表</title>
     <div>
         <form id="List">
-            名字：<input type="text" name="name" size="30">
-            是否是班主任：<input type="text" name="flag" size="2">
+            年级：<input type="text" name="grade" size="20">
+            班级：<input type="text" name="clazz" size="20">
+            科目：<input type="text" name="kemu" size="20">
             <input type="button" value="查询" onclick="lists()">
             <br>
         </form>
-        <form id="Add">
-            姓名：<input type="text" name="name" size="30">
-            是否是班主任<input type="text" name="flag" size="2">
-            <input type="button" value="添加老师" onclick="Add()">
-            <br>
-        </form>
-        <div id="updateForm"></div>
+        <a href="http://127.0.0.1:8080/addShijuan">添加新试卷</a>
     </div>
 </head>
 
 <body>
 <div class="parent">
     <div class="left">
-        <p><a href="http://127.0.0.1:8080/listStudent">编辑学生</a></p>
+        <p><a href="http://127.0.0.1:8080/listShijuan">编辑学生</a></p>
         <p><a href="http://127.0.0.1:8080/listTeacher">编辑老师</a></p>
         <p><a href="http://127.0.0.1:8080/listClazz">编辑班级</a></p>
         <p><a href="http://127.0.0.1:8080/listTiku">编辑题库</a></p>
@@ -44,15 +39,15 @@
     function lists() {
         $.ajax({
             type: "POST",
-            url: "ListTeacher",
+            url: "ListShijuan",
             data: $('#List').serialize(),
             dataType: "json",//类型
             success: function (msg) {
 
-                var html = "<table id='myTable' border='1'><tr><td>姓名</td><td>是否是班主任</td><td>修改</td><td>删除</td></tr>";
+                var html = "<table id='myTable' border='1'><tr><td>姓名</td><td>年级</td><td>班级</td><td>修改</td><td>删除</td></tr>";
                 for (var i = 0; i < msg.length; i++) {    //遍历data数组
                     var ls = msg[i];
-                    html += "<tr  ><td>" + ls.name + "</td><td>" + ls.flag + "</td><td><button onclick='updateForm(" + ls.id + "," + "\"" + ls.name + "\"," + ls.flag + ")'>修改</button></td><td><button onclick='deleteReg(" + ls.id + "," + i + ")'>删除</button></td>";
+                    html += "<tr  ><td>" + ls.name + "</td><td>" + ls.grade + "</td><td>" + ls.clazz + "</td><td><button onclick='updateForm(" + ls.id + "," + "\"" + ls.name + "\"," + ls.grade + "," + ls.clazz + ")'>修改</button></td><td><button onclick='deleteReg(" + ls.id + "," + i + ")'>删除</button></td>";
                 }
                 html += "</tr></table>";
                 $("#Result").html(html);
@@ -67,7 +62,7 @@
     function deleteReg(id, i) {
         $.ajax({
             type: 'post',
-            url: 'DeleteTeacher',
+            url: 'DeleteShijuan',
             data: {
                 "id": id
             },
@@ -86,12 +81,12 @@
 
         $.ajax({
             type: "POST",
-            url: "AddTeacher",
+            url: "AddShijuan",
             data: $('#Add').serialize(),
             success: function (data) {
                 if (data == "success") {
                     alert("添加成功");
-                } else {
+                }else {
                     alert("添加失败");
                 }
             },
@@ -105,11 +100,12 @@
 
 
 <script>
-    function updateForm(id, name, flag) {
+    function updateForm(id, name, grade, clazz) {
         var html = "<form id='Update'>" +
             "<input type='hidden' name='id' value='" + id + "'>" +
             "姓名：<input type='text' name='name' size='30' value='" + name + "'>" +
-            "是否是班主任：<input type='text' name='flag' size='2' value='" + flag + "'>" +
+            "年级：<input type='text' name='grade' size='2' value='" + grade + "'>" +
+            "班级：<input type='text' name='clazz' size='3' value='" + clazz + "'>" +
             "<input type='button' value='编辑' onclick='Update()'>" +
             "<br>" +
             "</form>";
@@ -121,12 +117,12 @@
 
         $.ajax({
             type: "POST",
-            url: "UpdateTeacher",
+            url: "UpdateShijuan",
             data: $('#Update').serialize(),
             success: function (data) {
                 if (data == "success") {
                     alert("修改成功");
-                } else {
+                }else {
                     alert("修改失败");
                 }
             },
