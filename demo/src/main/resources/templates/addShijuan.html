@@ -12,13 +12,13 @@
             <input type="button" value="预选题目查询" onclick="lists()">
             <br>
         </form>
-        <form id="Add">
+        <form id="AddShijuan">
             <input type="checkbox" name="AddShijuan" value="2">eeeeeeeeeee
             <input type="checkbox" name="AddShijuan" value="3">dddddddd
             <input type="checkbox" name="AddShijuan" value="14">rrr
             <input type="checkbox" name="AddShijuan" value="15">dddd
             <input type="checkbox" name="AddShijuan" value="16">dddd
-            <input type="button" value="添加题目" onclick="AddShijuan()">
+            <input type="button" value="添加题目" onclick="Adds()">
         </form>
     </div>
 </head>
@@ -55,7 +55,7 @@
                     var ls = msg[i];
                     html += "<input type='checkbox' name='AddShijuan' value='" + ls.id + "'/>" + ls.question + "<br>";
                 }
-                html += "<input type='button' value='添加题目' onclick='AddShijuan()'>";
+                html += "<input type='button' value='添加题目' onclick='Adds()'>";
                 html += "</form>"
                 $("#Result").html(html);
             },
@@ -67,11 +67,11 @@
 
 </script>
 <script>
-    function AddShijuan() {
+    function Adds() {
         $.ajax({
             type: "POST",
             url: "AddShijuan",
-            data: $('#Add').serialize(),
+            data: $('#AddShijuan').serialize(),
             success: function (data) {
                 if (data == "success") {
                     alert("添加成功");
