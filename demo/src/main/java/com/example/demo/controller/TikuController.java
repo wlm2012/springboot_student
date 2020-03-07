@@ -20,8 +20,8 @@ public class TikuController {
     private TikuService TikuService;
 
     @RequestMapping("/ListTiku")
-    public List<Tiku> listTiku(String grade, String kemu) {
-        return TikuService.listTiku(grade, kemu);
+    public List<Tiku> listTiku(Tiku tiku) {
+        return TikuService.listTiku(tiku);
     }
 
 

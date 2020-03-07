@@ -47,6 +47,10 @@ public class HtmlController {
         return "addShijuan";
     }
 
+    @RequestMapping("/test")
+    public String test() {
+        return "test";
+    }
 
 
 //    @RequestMapping("/modifyStudent")

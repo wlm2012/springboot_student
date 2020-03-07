@@ -1,6 +1,7 @@
 package com.example.demo.mapper;
 
 import com.example.demo.entity.Teacher;
+import com.example.demo.entity.TeacherEntity;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -19,4 +20,6 @@ public interface TeacherMapper {
     void addTeacher(Teacher Teacher);
 
     int updateTeacher(Teacher Teacher);
+
+    List<TeacherEntity> listTeacher(TeacherEntity teacherEntity);
 }

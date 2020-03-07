@@ -4,6 +4,7 @@
     <resultMap id="BaseResultMap" type="com.example.demo.entity.Tiku">
         <id column="id" property="id" jdbcType="INTEGER"/>
         <result column="question" property="question" jdbcType="VARCHAR"/>
+        <result column="answers" property="answers" jdbcType="VARCHAR"/>
         <result column="answer" property="answer" jdbcType="VARCHAR"/>
         <result column="grade" property="grade" jdbcType="VARCHAR"/>
         <result column="kemu" property="kemu" jdbcType="VARCHAR"/>
@@ -25,14 +26,14 @@
     </delete>
 
     <insert id="addTiku">
-        INSERT INTO t_Tiku (question,answer, grade, kemu)
-        VALUES(#{question,jdbcType=VARCHAR},#{answer,jdbcType=VARCHAR}, #{grade,jdbcType=VARCHAR}, #{kemu,jdbcType=VARCHAR});
+        INSERT INTO t_Tiku (question,answers,answer, grade, kemu)
+        VALUES(#{question,jdbcType=VARCHAR},#{answers,jdbcType=VARCHAR},#{answer,jdbcType=VARCHAR}, #{grade,jdbcType=VARCHAR}, #{kemu,jdbcType=VARCHAR});
 
     </insert>
 
 
     <update id="updateTiku">
-        update t_Tiku set question=#{question,jdbcType=VARCHAR},answer=#{answer,jdbcType=VARCHAR}
+        update t_Tiku set question=#{question,jdbcType=VARCHAR},answer=#{answer,jdbcType=VARCHAR},answers=#{answers,jdbcType=VARCHAR}
         ,grade=#{grade,jdbcType=VARCHAR},kemu=#{kemu,jdbcType=VARCHAR} where id=#{id,jdbcType=INTEGER};
     </update>
 

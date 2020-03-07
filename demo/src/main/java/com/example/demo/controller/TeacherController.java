@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 
 import com.example.demo.entity.Teacher;
+import com.example.demo.entity.TeacherEntity;
 import com.example.demo.service.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,8 +21,8 @@ public class TeacherController {
     private TeacherService TeacherService;
 
     @RequestMapping("/ListTeacher")
-    public List<Teacher> listTeacher(String name, String flag) {
-        return TeacherService.listTeacher(name, flag);
+    public List<TeacherEntity> listTeacher(TeacherEntity teacher) {
+        return TeacherService.listTeacher(teacher);
     }
 
 

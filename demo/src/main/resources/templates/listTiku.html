@@ -13,6 +13,7 @@
         </form>
         <form id="Add">
             问题：<textarea name="question" rows="3" cols="100"></textarea><br>
+            选项：<input type="text" name="answers" size="50">
             答案：<input type="text" name="answer" size="30">
             年级：<input type="text" name="grade" size="2">
             科目：<input type="text" name="kemu" size="10">
@@ -51,10 +52,10 @@
             dataType: "json",//类型
             success: function (msg) {
 
-                var html = "<table id='myTable' border='1'><tr><td>问题</td><td>答案</td><td>年级</td><td>科目</td><td>修改</td><td>删除</td></tr>";
+                var html = "<table id='myTable' border='1'><tr><td>问题</td><td>选项</td><td>答案</td><td>年级</td><td>科目</td><td>修改</td><td>删除</td></tr>";
                 for (var i = 0; i < msg.length; i++) {    //遍历data数组
                     var ls = msg[i];
-                    html += "<tr><td>" + ls.question + "</td><td>" + ls.answer + "</td><td>" + ls.grade + "</td><td>" + ls.kemu + "</td><td><button onclick='updateForm(" + ls.id + "," + "\"" + ls.question + "\",\"" + ls.answer + "\"," + ls.grade + ",\"" + ls.kemu + "\")'>修改</button></td><td><button onclick='deleteReg(" + ls.id + "," + i + ")'>删除</button></td>";
+                    html += "<tr><td>" + ls.question + "</td><td>" + ls.answers + "</td><td>" + ls.answer + "</td><td>" + ls.grade + "</td><td>" + ls.kemu + "</td><td><button onclick='updateForm(" + ls.id + "," + "\"" + ls.question + "\",\"" + ls.answers+ "\",\"" + ls.answer + "\"," + ls.grade + ",\"" + ls.kemu + "\")'>修改</button></td><td><button onclick='deleteReg(" + ls.id + "," + i + ")'>删除</button></td>";
                 }
                 html += "</tr></table>";
                 $("#Result").html(html);
@@ -107,12 +108,13 @@
 
 
 <script>
-    function updateForm(id, question, answer, grade, kemu) {
+    function updateForm(id, question, answers, answer, grade, kemu) {
         var reg = new RegExp("<br>", "g");
         var newstr = question.replace(reg, "\r\n");
         var html = "<form id='Update'>" +
             "<input type='hidden' name='id' value='" + id + "'>" +
             "问题：<textarea  name='question' rows='3' cols='100' >" + newstr + "</textarea><br>" +
+            "选项：<input type='text' name='answers' size='50' value='" + answers + "'>" +
             "答案：<input type='text' name='answer' size='6' value='" + answer + "'>" +
             "班级：<input type='text' name='grade' size='3' value='" + grade + "'>" +
             "科目：<input type='text' name='kemu' size='10' value='" + kemu + "'>" +

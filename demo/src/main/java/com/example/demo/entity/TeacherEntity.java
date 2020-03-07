@@ -7,9 +7,12 @@ import lombok.Data;
  * @author wlm
  */
 @Data
-public class Teacher {
+public class TeacherEntity {
 
     private String id;
     private String name;
+    private String grade;
+    private String clazz;
+    private String kemu;
     private String flag;
 }

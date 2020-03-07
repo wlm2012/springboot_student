@@ -12,7 +12,7 @@ import java.util.List;
 @Mapper
 public interface TikuMapper {
 
-    List<Tiku> findTiku(String grade,String kemu);
+    List<Tiku> findTiku(Tiku tiku);
 
     int deleteTikuById(int id);
 

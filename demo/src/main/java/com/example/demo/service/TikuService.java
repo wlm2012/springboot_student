@@ -27,8 +27,8 @@ public class TikuService {
     @Autowired
     private ClazzMapper clazzMapper;
 
-    public List<Tiku> listTiku(String grade, String kemu) {
-        var Tiku = TikuMapper.findTiku(grade, kemu);
+    public List<Tiku> listTiku(Tiku tiku) {
+        var Tiku = TikuMapper.findTiku(tiku);
         return Tiku;
     }
 

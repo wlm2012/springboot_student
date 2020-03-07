@@ -6,13 +6,19 @@
     <title>教师列表</title>
     <div>
         <form id="List">
-            名字：<input type="text" name="name" size="30">
+            姓名：<input type="text" name="name" size="30">
+            任教年级：<input type="text" name="grade" size="5">
+            任教班级：<input type="text" name="clazz" size="5">
+            任教科目：<input type="text" name="kemu" size="20">
             是否是班主任：<input type="text" name="flag" size="2">
             <input type="button" value="查询" onclick="lists()">
             <br>
         </form>
         <form id="Add">
-            姓名：<input type="text" name="name" size="30">
+            姓名：<input type="text" name="name" size="20">
+            任教年级：<input type="text" name="grade" size="5">
+            任教班级：<input type="text" name="clazz" size="5">
+            任教科目：<input type="text" name="kemu" size="20">
             是否是班主任<input type="text" name="flag" size="2">
             <input type="button" value="添加老师" onclick="Add()">
             <br>
@@ -49,10 +55,22 @@
             dataType: "json",//类型
             success: function (msg) {
 
-                var html = "<table id='myTable' border='1'><tr><td>姓名</td><td>是否是班主任</td><td>修改</td><td>删除</td></tr>";
+                var html = "<table id='myTable' border='1'><tr><td>姓名</td><td>任教年级</td><td>任教班级</td><td>任教科目</td><td>是否是班主任</td><td>修改</td><td>删除</td></tr>";
                 for (var i = 0; i < msg.length; i++) {    //遍历data数组
                     var ls = msg[i];
-                    html += "<tr  ><td>" + ls.name + "</td><td>" + ls.flag + "</td><td><button onclick='updateForm(" + ls.id + "," + "\"" + ls.name + "\"," + ls.flag + ")'>修改</button></td><td><button onclick='deleteReg(" + ls.id + "," + i + ")'>删除</button></td>";
+                    if (ls.kemu==null){
+                        ls.kemu='';
+                    }
+                    if (ls.name==null){
+                        ls.name='';
+                    }
+                    if (ls.grade==null){
+                        ls.grade='';
+                    }
+                    if (ls.clazz==null){
+                        ls.clazz='';
+                    }
+                    html += "<tr  ><td>" + ls.name + "</td><td>" + ls.grade + "</td><td>" + ls.clazz + "</td><td>" + ls.kemu + "</td><td>" + ls.flag + "</td><td><button onclick='updateForm(" + ls.id + ",\"" + ls.name + "\"," + ls.grade+ "," + ls.clazz +",\"" + ls.kemu +"\"," + ls.flag + ")'>修改</button></td><td><button onclick='deleteReg(" + ls.id + "," + i + ")'>删除</button></td>";
                 }
                 html += "</tr></table>";
                 $("#Result").html(html);
@@ -92,7 +110,7 @@
                 if (data == "success") {
                     alert("添加成功");
                 } else {
-                    alert("添加失败");
+                    alert(data);
                 }
             },
             error: function () {
@@ -105,10 +123,13 @@
 
 
 <script>
-    function updateForm(id, name, flag) {
+    function updateForm(id, name,grade,clazz,kemu, flag) {
         var html = "<form id='Update'>" +
             "<input type='hidden' name='id' value='" + id + "'>" +
-            "姓名：<input type='text' name='name' size='30' value='" + name + "'>" +
+            "姓名：<input type='text' name='name' size='20' value='" + name + "'>" +
+            "年级：<input type='text' name='grade' size='5' value='" + grade + "'>" +
+            "班级：<input type='text' name='clazz' size='5' value='" + clazz + "'>" +
+            "科目：<input type='text' name='kemu' size='20' value='" + kemu + "'>" +
             "是否是班主任：<input type='text' name='flag' size='2' value='" + flag + "'>" +
             "<input type='button' value='编辑' onclick='Update()'>" +
             "<br>" +
@@ -127,7 +148,7 @@
                 if (data == "success") {
                     alert("修改成功");
                 } else {
-                    alert("修改失败");
+                    alert(data);
                 }
             },
             error: function () {
