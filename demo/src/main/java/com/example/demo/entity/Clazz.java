@@ -6,7 +6,7 @@ import lombok.Data;
 @Data
 public class Clazz {
 
-    private String id;
+    private Integer id;
     private String grade;
     private String clazz;
 }

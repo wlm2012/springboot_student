@@ -3,6 +3,7 @@
 <mapper namespace="com.example.demo.mapper.TeacherMapper">
     <resultMap id="BaseResultMap" type="com.example.demo.entity.TeacherEntity">
         <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="kid" property="kid" jdbcType="VARCHAR"/>
         <result column="name" property="name" jdbcType="VARCHAR"/>
         <result column="flag" property="flag" jdbcType="VARCHAR"/>
         <result column="grade" property="grade" jdbcType="VARCHAR"/>
@@ -25,10 +26,9 @@
         delete from t_Teacher where id = #{id,jdbcType=INTEGER};
     </delete>
 
-    <insert id="addTeacher">
+    <insert id="addTeacher" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO t_Teacher (name, flag)
         VALUES(#{name,jdbcType=VARCHAR}, #{flag,jdbcType=VARCHAR});
-
     </insert>
 
 
@@ -38,23 +38,31 @@
     </update>
 
     <select id="listTeacher" resultMap="BaseResultMap">
-        select a.miaoshu as kemu,b.clazz,b.grade,c.teacher_id from t_kemu a,t_clazz b,t_teacher_clazz_kemu c,t_teacher d
-        where a.id=c.kemu_id and b.id=c.clazz_id
-        <if test="clazz != null and clazz !=''">
-            and b.clazz = #{clazz,jdbcType=VARCHAR}
-        </if>
-        <if test="grade != null and grade !=''">
-            and b.grade= #{grade,jdbcType=VARCHAR}
-        </if>
-        <if test="kemu != null and kemu !=''">
-            and a.miaoshu = #{kemu,jdbcType=VARCHAR}
-        </if>
-        <if test="flag != null and flag !=''">
-            and d.flag= #{flag,jdbcType=VARCHAR}
-        </if>
-        <if test="name != null and name !=''">
-            and d.name = #{name,jdbcType=VARCHAR}
-        </if>
+        select a.id,a.name,a.flag,b.id as kid ,b.grade,b.clazz,b.kemu from t_teacher a
+        left join (select a.id,a.teacher_id,b.grade,b.clazz,c.miaoshu as kemu from
+        t_teacher_clazz_kemu a, t_clazz b,t_kemu c where a.clazz_id=b.id and a.kemu_id=c.id) b
+        on a.id=b.teacher_id
+        <where>
+            <if test="clazz != null and clazz !=''">
+                and b.clazz = #{clazz,jdbcType=VARCHAR}
+            </if>
+            <if test="grade != null and grade !=''">
+                and b.grade= #{grade,jdbcType=VARCHAR}
+            </if>
+            <if test="kemu != null and kemu !=''">
+                and b.kemu = #{kemu,jdbcType=VARCHAR}
+            </if>
+            <if test="flag != null and flag !=''">
+                and a.flag= #{flag,jdbcType=VARCHAR}
+            </if>
+            <if test="name != null and name !=''">
+                and a.name = #{name,jdbcType=VARCHAR}
+            </if>
+            <if test="id != null and id !=''">
+                and a.id = #{id,jdbcType=INTEGER}
+            </if>
+        </where>
+
     </select>
 
 </mapper>

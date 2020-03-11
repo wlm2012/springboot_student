@@ -3,11 +3,12 @@
 <mapper namespace="com.example.demo.mapper.TeacherClazzMapper">
     <resultMap id="BaseResultMap" type="com.example.demo.entity.TeacherClazz">
         <id column="id" property="id" jdbcType="INTEGER"/>
-        <result column="teacher_id" property="teacher_id" jdbcType="VARCHAR"/>
-        <result column="clazz_id" property="clazz_id" jdbcType="VARCHAR"/>
+        <result column="teacher_id" property="teacher_id" jdbcType="INTEGER"/>
+        <result column="clazz_id" property="clazz_id" jdbcType="INTEGER"/>
+        <result column="kemu_id" property="kemu_id" jdbcType="INTEGER"/>
     </resultMap>
     <select id="findTeacherClazz" resultMap="BaseResultMap">
-        select * from t_TeacherClazz
+        select * from t_teacher_clazz_kemu
         <where>
             <if test="teacher_id != null and teacher_id !=''">
                 and teacher_id = #{teacher_id,jdbcType=VARCHAR}
@@ -15,23 +16,31 @@
             <if test="clazz_id != null and clazz_id !=''">
                 and clazz_id= #{clazz_id,jdbcType=VARCHAR}
             </if>
+            <if test="kemu_id != null and kemu_id !=''">
+                and kemu_id= #{kemu_id,jdbcType=VARCHAR}
+            </if>
         </where>
     </select>
 
     <delete id="deleteTeacherClazzById" parameterType="int">
-        delete from t_TeacherClazz where id = #{id,jdbcType=INTEGER};
+        delete from t_teacher_clazz_kemu where id = #{id,jdbcType=INTEGER};
     </delete>
 
     <insert id="addTeacherClazz">
-        INSERT INTO t_TeacherClazz (teacher_id, teacher_id)
-        VALUES(#{teacher_id,jdbcType=VARCHAR}, #{teacher_id,jdbcType=VARCHAR});
+        INSERT INTO t_teacher_clazz_kemu (teacher_id, clazz_id,kemu_id)
+        VALUES(#{teacher_id,jdbcType=VARCHAR}, #{clazz_id,jdbcType=VARCHAR}, #{kemu_id,jdbcType=VARCHAR});
 
     </insert>
 
 
     <update id="updateTeacherClazz">
-        update t_TeacherClazz set teacher_id=#{teacher_id,jdbcType=VARCHAR}
-        ,teacher_id=#{teacher_id,jdbcType=VARCHAR} where id=#{id,jdbcType=INTEGER};
+        update t_teacher_clazz_kemu set
+        <if test="teacher_id != null and teacher_id !=''">
+        teacher_id=#{teacher_id,jdbcType=VARCHAR},
+        </if>
+        clazz_id=#{clazz_id,jdbcType=VARCHAR},
+        kemu_id=#{kemu_id,jdbcType=VARCHAR}
+        where id=#{id,jdbcType=INTEGER};
     </update>
 
 

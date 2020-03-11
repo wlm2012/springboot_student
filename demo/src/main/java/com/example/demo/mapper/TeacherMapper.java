@@ -13,11 +13,11 @@ import java.util.List;
 @Mapper
 public interface TeacherMapper {
 
-    List<Teacher> findTeacher(String name,String flag);
+    List<Teacher> findTeacher(Teacher teacher);
 
     int deleteTeacherById(int id);
 
-    void addTeacher(Teacher Teacher);
+    int addTeacher(Teacher Teacher);
 
     int updateTeacher(Teacher Teacher);
 

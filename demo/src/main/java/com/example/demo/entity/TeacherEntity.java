@@ -9,7 +9,8 @@ import lombok.Data;
 @Data
 public class TeacherEntity {
 
-    private String id;
+    private Integer id;
+    private String kid;
     private String name;
     private String grade;
     private String clazz;

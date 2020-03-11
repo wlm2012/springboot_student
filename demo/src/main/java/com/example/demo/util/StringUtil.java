@@ -1,7 +1,7 @@
 package com.example.demo.util;
 
 public class StringUtil {
-    public static Boolean isEmpty(String s) {
+    public static boolean isEmpty(String s) {
         if (s == null) {
             return true;
         }
@@ -10,4 +10,15 @@ public class StringUtil {
         }
         return false;
     }
+
+    public static boolean isEmpty(String[] ss){
+        for (String s:ss ){
+            if (isEmpty(s)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+
 }
