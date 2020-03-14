@@ -8,10 +8,14 @@
         <result column="grade" property="grade" jdbcType="VARCHAR"/>
         <result column="clazz" property="clazz" jdbcType="VARCHAR"/>
         <result column="kemu" property="kemu" jdbcType="VARCHAR"/>
+        <result column="year" property="year" jdbcType="VARCHAR"/>
     </resultMap>
     <select id="findShijuan" resultMap="BaseResultMap">
         select * from t_Shijuan
         <where>
+            <if test="id != null and id !=''">
+                and id = #{id,jdbcType=INTEGER}
+            </if>
             <if test="clazz != null and clazz !=''">
                 and clazz = #{clazz,jdbcType=VARCHAR}
             </if>
@@ -31,7 +35,7 @@
         delete from t_Shijuan where id = #{id,jdbcType=INTEGER};
     </delete>
 
-    <insert id="addShijuan">
+    <insert id="addShijuan" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO t_shijuan
         (name, question_id, clazz, grade, kemu)
         VALUES( #{name,jdbcType=VARCHAR}, #{question_id,jdbcType=VARCHAR},
@@ -41,8 +45,27 @@
 
 
     <update id="updateShijuan">
-        update t_Shijuan set name=#{name,jdbcType=VARCHAR} ,question_id=#{question_id,jdbcType=VARCHAR}
-        ,grade=#{grade,jdbcType=VARCHAR},clazz=#{clazz,jdbcType=VARCHAR}, kemu=#{kemu,jdbcType=VARCHAR}
+        update t_Shijuan
+        <set>
+            <if test="name != null and name !=''">
+                name=#{name,jdbcType=VARCHAR},
+            </if>
+            <if test="question_id != null and question_id !=''">
+                question_id=#{question_id,jdbcType=VARCHAR},
+            </if>
+            <if test="grade != null and grade !=''">
+                grade=#{grade,jdbcType=VARCHAR},
+            </if>
+            <if test="clazz != null and clazz !=''">
+                clazz=#{clazz,jdbcType=VARCHAR},
+            </if>
+            <if test="kemu != null and kemu !=''">
+                kemu=#{kemu,jdbcType=VARCHAR},
+            </if>
+            <if test="year != null and year !=''">
+                year=#{year,jdbcType=VARCHAR},
+            </if>
+        </set>
         where id=#{id,jdbcType=INTEGER};
     </update>
 

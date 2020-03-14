@@ -2,6 +2,8 @@ package com.example.demo.controller;
 
 
 import com.example.demo.entity.Shijuan;
+import com.example.demo.entity.Timu;
+import com.example.demo.entity.Timus;
 import com.example.demo.service.ShijuanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -35,14 +37,22 @@ public class ShijuanController {
     }
 
     @RequestMapping("/AddShijuan")
-    public String addShijuan(Shijuan Shijuan) {
-        ShijuanService.addShijuan(Shijuan);
-        return "success";
+    public Timus addShijuan(Shijuan shijuan) {
+        return ShijuanService.addShijuan(shijuan);
     }
 
     @RequestMapping("/UpdateShijuan")
     public String updateShijuan(Shijuan Shijuan) {
         int result = ShijuanService.updateShijuan(Shijuan);
+        if (1 == result) {
+            return "success";
+        }
+        return "fail";
+    }
+
+    @RequestMapping("/UpdateQuestion")
+    public String updateQuestion(Shijuan shijuan){
+        int result = ShijuanService.updateQuestion(shijuan);
         if (1 == result) {
             return "success";
         }

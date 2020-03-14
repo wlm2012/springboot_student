@@ -6,6 +6,7 @@
     <title>试卷列表</title>
     <div>
         <form id="List">
+            试卷名：<input type="text" name="name" size="20">
             年级：<input type="text" name="grade" size="10">
             班级：<input type="text" name="clazz" size="10">
             科目：<input type="text" name="kemu" size="20">
@@ -13,7 +14,16 @@
             <input type="button" value="查询" onclick="lists()">
             <br>
         </form>
-        <a href="http://127.0.0.1:8080/addShijuan">添加试卷</a>
+        <form id="Add">
+            试卷名：<input type="text" name="name" size="20">
+            年级：<input type="text" name="grade" size="10">
+            班级：<input type="text" name="clazz" size="10">
+            科目：<input type="text" name="kemu" size="20">
+            年：<input type="text" name="year" size="10">
+            <input type="button" value="添加试卷" onclick="Add()">
+            <br>
+        </form>
+        <div id="updateForm"></div>
         <br><br>
     </div>
 </head>
@@ -38,6 +48,13 @@
 </body>
 <script type="text/javascript"
         src="webjars/jquery/3.4.1/jquery.min.js"></script>
+
+<script>
+    function Add() {
+        window.location.href = "http://127.0.0.1:8080/addShijuan?"+$("#Add :input").serialize();
+    }
+
+</script>
 <script>
     function lists() {
         $.ajax({
@@ -47,10 +64,10 @@
             dataType: "json",//类型
             success: function (msg) {
 
-                var html = "<table id='myTable' border='1'><tr><td>试卷名</td><td>年级</td><td>班级</td><td>科目</td><td>年</td><td>修改</td><td>删除</td></tr>";
+                var html = "<table id='myTable' border='1'><tr><td>试卷名</td><td>年级</td><td>班级</td><td>科目</td><td>年</td><td>编辑试卷</td><td>编辑题目</td><td>删除</td></tr>";
                 for (var i = 0; i < msg.length; i++) {    //遍历data数组
                     var ls = msg[i];
-                    html += "<tr><td>" + ls.name + "</td><td>" + ls.grade + "</td><td>" + ls.clazz + "</td><td>" + ls.kemu + "</td><td>" + ls.year + "</td><td><a href='http://127.0.0.1:8080/updateShijuan'>编辑题目</td><td><button onclick='deleteReg(" + ls.id + "," + i + ")'>删除</button></td>";
+                    html += "<tr><td>" + ls.name + "</td><td>" + ls.grade + "</td><td>" + ls.clazz + "</td><td>" + ls.kemu + "</td><td>" + ls.year + "</td><td><button onclick='updateForm(" + ls.id + "," + "\"" + ls.name + "\"," + ls.grade + "," + ls.clazz + ",\"" + ls.kemu + "\"," + ls.year + ")'>修改</button></td><td><a href='http://127.0.0.1:8080/addShijuan?id=" + ls.id + "'>编辑题目</td><td><button onclick='deleteReg(" + ls.id + "," + i + ")'>删除</button></td>";
                 }
                 html += "</tr></table>";
                 $("#Result").html(html);
@@ -80,5 +97,43 @@
     }
 </script>
 
+
+<script>
+    function updateForm(id, name, grade, clazz,kemu,year) {
+        var html = "<form id='Update'>" +
+            "<input type='hidden' name='id' value='" + id + "'>" +
+            "试卷名：<input type='text' name='name' size='30' value='" + name + "'>" +
+            "年级：<input type='text' name='grade' size='2' value='" + grade + "'>" +
+            "班级：<input type='text' name='clazz' size='3' value='" + clazz + "'>" +
+            "科目：<input type='text' name='kemu' size='10' value='" + kemu + "'>" +
+            "年：<input type='text' name='year' size='5' value='" + year + "'>" +
+            "<input type='button' value='编辑' onclick='Update()'>" +
+            "<br>" +
+            "</form>";
+
+        $("#updateForm").html(html);
+    };
+
+    function Update() {
+
+        $.ajax({
+            type: "POST",
+            url: "UpdateShijuan",
+            data: $('#Update').serialize(),
+            success: function (data) {
+                if (data == "success") {
+                    alert("修改成功");
+                }else {
+                    alert("修改失败");
+                }
+            },
+            error: function () {
+                alert("修改失败");
+            }
+        });
+    };
+
+
+</script>
 
 </html>
