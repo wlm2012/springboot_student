@@ -20,8 +20,8 @@ public class StudentController {
     private StudentService studentService;
 
     @RequestMapping("/ListStudent")
-    public List<Student> listStudent(String clazz, String grade) {
-        return studentService.listStudent(clazz, grade);
+    public List<Student> listStudent(Student student) {
+        return studentService.listStudent(student);
     }
 
 

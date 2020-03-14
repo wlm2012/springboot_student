@@ -10,6 +10,7 @@
 <body>
 <div class="parent">
     <div class="left">
+        <p><a href="http://127.0.0.1:8080/index">首页</a></p>
         <p><a href="http://127.0.0.1:8080/listStudent">编辑学生</a></p>
         <p><a href="http://127.0.0.1:8080/listTeacher">编辑老师</a></p>
         <p><a href="http://127.0.0.1:8080/listClazz">编辑班级</a></p>
@@ -17,10 +18,16 @@
         <p><a href="http://127.0.0.1:8080/listKemu">编辑科目</a></p>
         <p><a href="http://127.0.0.1:8080/listShijuan">编辑试卷</a></p>
         <p><a href="http://127.0.0.1:8080/listTeacherClazz">任课管理</a></p>
+
     </div>
     <div class="right">
         <p>
-        <div ></div>
+        <div>
+            <form id="List">
+                学号：<input type="text" name="id" size="20">
+                <input type="button" value="确定" onclick="Lists()">
+            </form>
+        </div>
         </p>
     </div>
 </div>
@@ -28,6 +35,48 @@
 <script type="text/javascript"
         src="webjars/jquery/3.4.1/jquery.min.js"></script>
 
+<script>
+    function Lists() {
+        $.ajax({
+            type: "POST",
+            url: "UpdateTeacherClazz",
+            data: $('#Update').serialize(),
+            success: function (data) {
+                if (data == "success") {
+                    alert("修改成功");
+                } else {
+                    alert(data);
+                }
+            },
+            error: function () {
+                alert("修改失败");
+            }
+        });
+    }
+
+
+    function lists() {
+        $.ajax({
+            type: "POST",
+            url: "ListShijuanById",
+            data: $('#List').serialize(),
+            dataType: "json",//类型
+            success: function (msg) {
+
+                var html = "<table id='myTable' border='1'><tr><td>试卷名</td><td>年级</td><td>班级</td><td>科目</td><td>年</td><td>选择试卷</td></tr>";
+                for (var i = 0; i < msg.length; i++) {    //遍历data数组
+                    var ls = msg[i];
+                    html += "<tr><td>" + ls.name + "</td><td>" + ls.grade + "</td><td>" + ls.clazz + "</td><td>" + ls.kemu + "</td><td>" + ls.year + "</td><td><a href='http://127.0.0.1:8080/addShijuan?id=" + ls.id + "'>编辑题目</td>";
+                }
+                html += "</tr></table>";
+                $("#Result").html(html);
+            },
+            error: function () {
+                alert("加载资源失败");
+            }
+        });
+    };
+</script>
 
 
 </html>

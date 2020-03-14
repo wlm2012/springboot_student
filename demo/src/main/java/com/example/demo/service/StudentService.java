@@ -18,9 +18,9 @@ public class StudentService {
     @Autowired
     private StudentMapper studentMapper;
 
-    public List<Student> listStudent(String clazz, String grade) {
-        var student = studentMapper.findStudent(clazz, grade);
-        return student;
+    public List<Student> listStudent(Student student) {
+        var students = studentMapper.findStudent(student);
+        return students;
     }
 
     public int deleteStudentById(int id) {

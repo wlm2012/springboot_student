@@ -2,9 +2,12 @@ package com.example.demo.controller;
 
 
 import com.example.demo.entity.Shijuan;
+import com.example.demo.entity.Student;
 import com.example.demo.entity.Timu;
 import com.example.demo.entity.Timus;
+import com.example.demo.mapper.StudentMapper;
 import com.example.demo.service.ShijuanService;
+import com.example.demo.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,11 +24,23 @@ public class ShijuanController {
     @Autowired
     private ShijuanService ShijuanService;
 
+    Autowired
+    private StudentService studentService;
+
     @RequestMapping("/ListShijuan")
     public List<Shijuan> listShijuan(Shijuan shijuan) {
         return ShijuanService.listShijuan(shijuan);
     }
 
+    @RequestMapping("/ListShijuanById")
+    public List<Shijuan> ListShijuanById(Student student) {
+        var students = studentService.listStudent(student);
+        if (students.size()==1){
+
+        }else {
+            return null;
+        }
+    }
 
     @RequestMapping("/DeleteShijuan")
     public String deleteShijuan(int id) {
@@ -51,7 +66,7 @@ public class ShijuanController {
     }
 
     @RequestMapping("/UpdateQuestion")
-    public String updateQuestion(Shijuan shijuan){
+    public String updateQuestion(Shijuan shijuan) {
         int result = ShijuanService.updateQuestion(shijuan);
         if (1 == result) {
             return "success";
