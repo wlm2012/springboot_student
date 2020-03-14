@@ -50,7 +50,7 @@ public class ShijuanService {
         System.out.println(shijuan.toString());
         tiku.setKemu(shijuan.getKemu());
         List<Tiku> tikus = tikuMapper.findTiku(tiku);
-        String[] queations = question_id.split(";");
+        String[] queations = question_id.split(",");
         Timus timus = new Timus();
         timus.setId(id);
         List<Timu> timuList = new ArrayList<>();

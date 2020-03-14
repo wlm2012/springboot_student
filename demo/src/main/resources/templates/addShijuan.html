@@ -6,7 +6,6 @@
     <title>编辑试卷</title>
     <div>
         <a href="http://127.0.0.1:8080/listShijuan">返回</a>
-        <div id="updateForm"></div>
     </div>
 </head>
 
@@ -61,7 +60,8 @@
             data: req,
             dataType: "json",//类型
             success: function (msg) {
-                var html = "<form id='AddShijuan'>";
+                var html = "<form id='Add'>";
+                html+="<input type='hidden' name='id' value='" + msg.id + "'>";
                 for (var i = 0; i < msg.list.length; i++) {    //遍历data数组
                     var ls = msg.list[i];
                     var check='';
@@ -88,7 +88,7 @@
 
         $.ajax({
             type: "POST",
-            url: "AddStudent",
+            url: "UpdateQuestion",
             data: $('#Add').serialize(),
             success: function (data) {
                 if (data == "success") {

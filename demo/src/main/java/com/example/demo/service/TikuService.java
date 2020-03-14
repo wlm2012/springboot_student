@@ -51,10 +51,7 @@ public class TikuService {
 
         if (StringUtil.isEmpty(answer)) {
             result = "答案不能为空";
-        } else {
-            answer = answer.toLowerCase();
-            Tiku.setAnswer(answer);
-        }
+        } else
 
         if (StringUtil.isEmpty(kemu)) {
             result = "答案不能为空";
