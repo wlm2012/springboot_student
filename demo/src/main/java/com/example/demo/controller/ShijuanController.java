@@ -30,6 +30,12 @@ public class ShijuanController {
         return ShijuanService.listShijuan(shijuan);
     }
 
+    @RequestMapping("/ListShijuans")
+    public List<Shijuan> listShijuans(Shijuan shijuan,String student_id) {
+        System.out.println(student_id);
+        return ShijuanService.listShijuan(shijuan);
+    }
+
 
     @RequestMapping("/DeleteShijuan")
     public String deleteShijuan(int id) {

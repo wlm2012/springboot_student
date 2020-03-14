@@ -45,7 +45,7 @@
             success: function (data) {
                 if (data.length === 1) {
                     var myear = new Date();
-                    lists(data[0].grade, data[0].clazz, myear.getFullYear())
+                    lists(data[0].grade, data[0].clazz, myear.getFullYear(),document.getElementsByName("id")[0].value)
                 } else {
                     alert("该学号不存在");
                 }
@@ -57,14 +57,16 @@
     }
 
 
-    function lists(grade, clazz, year) {
+    function lists(grade, clazz, year,student_id) {
+        alert(student_id);
         $.ajax({
             type: "POST",
-            url: "ListShijuan",
+            url: "ListShijuans",
             data: {
                 "grade": grade,
                 "clazz": clazz,
-                "year": year
+                "year": year,
+                "student_id":student_id
             },
             dataType: "json",//类型
             success: function (msg) {
