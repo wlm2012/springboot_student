@@ -24,23 +24,12 @@ public class ShijuanController {
     @Autowired
     private ShijuanService ShijuanService;
 
-    Autowired
-    private StudentService studentService;
 
     @RequestMapping("/ListShijuan")
     public List<Shijuan> listShijuan(Shijuan shijuan) {
         return ShijuanService.listShijuan(shijuan);
     }
 
-    @RequestMapping("/ListShijuanById")
-    public List<Shijuan> ListShijuanById(Student student) {
-        var students = studentService.listStudent(student);
-        if (students.size()==1){
-
-        }else {
-            return null;
-        }
-    }
 
     @RequestMapping("/DeleteShijuan")
     public String deleteShijuan(int id) {

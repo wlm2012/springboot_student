@@ -164,7 +164,7 @@
             url: "UpdateTeacherClazz",
             data: $('#Update').serialize(),
             success: function (data) {
-                if (data == "success") {
+                if (data === "success") {
                     alert("修改成功");
                 } else {
                     alert(data);

@@ -29,6 +29,7 @@
             </form>
         </div>
         </p>
+        <div id="Result" style="margin: 0px 0 0px 5%;"></div>
     </div>
 </div>
 </body>
@@ -39,34 +40,39 @@
     function Lists() {
         $.ajax({
             type: "POST",
-            url: "UpdateTeacherClazz",
-            data: $('#Update').serialize(),
+            url: "ListStudent",
+            data: $('#List').serialize(),
             success: function (data) {
-                if (data == "success") {
-                    alert("修改成功");
+                if (data.length === 1) {
+                    var myear = new Date();
+                    lists(data[0].grade, data[0].clazz, myear.getFullYear())
                 } else {
-                    alert(data);
+                    alert("该学号不存在");
                 }
             },
             error: function () {
-                alert("修改失败");
+                alert("返回失败，请重试");
             }
         });
     }
 
 
-    function lists() {
+    function lists(grade, clazz, year) {
         $.ajax({
             type: "POST",
-            url: "ListShijuanById",
-            data: $('#List').serialize(),
+            url: "ListShijuan",
+            data: {
+                "grade": grade,
+                "clazz": clazz,
+                "year": year
+            },
             dataType: "json",//类型
             success: function (msg) {
 
                 var html = "<table id='myTable' border='1'><tr><td>试卷名</td><td>年级</td><td>班级</td><td>科目</td><td>年</td><td>选择试卷</td></tr>";
                 for (var i = 0; i < msg.length; i++) {    //遍历data数组
                     var ls = msg[i];
-                    html += "<tr><td>" + ls.name + "</td><td>" + ls.grade + "</td><td>" + ls.clazz + "</td><td>" + ls.kemu + "</td><td>" + ls.year + "</td><td><a href='http://127.0.0.1:8080/addShijuan?id=" + ls.id + "'>编辑题目</td>";
+                    html += "<tr><td>" + ls.name + "</td><td>" + ls.grade + "</td><td>" + ls.clazz + "</td><td>" + ls.kemu + "</td><td>" + ls.year + "</td><td><a href='http://127.0.0.1:8080/addShijuan?id=" + ls.id + "'>选择试卷</td>";
                 }
                 html += "</tr></table>";
                 $("#Result").html(html);
