@@ -5,6 +5,7 @@ import com.example.demo.entity.*;
 import com.example.demo.mapper.ClazzMapper;
 import com.example.demo.service.TikuService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -43,8 +44,10 @@ public class TikuController {
     }
 
     @RequestMapping("/AddTikus")
-    public String addTikus(Questions questions) {
-        return TikuService.addTikus(questions);
+    public String addTikus(@RequestBody Questions questions) {
+//        System.out.println(student_id);
+//        return student_id;
+          return TikuService.addTikus(questions);
     }
 
     @RequestMapping("/UpdateTiku")

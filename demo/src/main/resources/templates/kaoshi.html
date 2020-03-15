@@ -101,6 +101,7 @@
         $.ajax({
             type: "POST",
             url: "AddTikus",
+            contentType: "application/json; charset=utf-8",
             data: strs,
             success: function (data) {
                 if (data === "success") {

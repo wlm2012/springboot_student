@@ -33,8 +33,9 @@
     </delete>
 
     <insert id="addChengji">
-        INSERT INTO t_Chengji (miaoshu)
-        VALUES(#{miaoshu,jdbcType=VARCHAR});
+        INSERT INTO t_Chengji (student_id,shijuan_id,result,clazz_id)
+        VALUES( #{student_id,jdbcType=VARCHAR}, #{shijuan_id,jdbcType=VARCHAR},
+        #{result,jdbcType=VARCHAR}, #{clazz_id,jdbcType=VARCHAR});
 
     </insert>
 
@@ -43,7 +44,6 @@
         update t_Chengji set miaoshu=#{miaoshu,jdbcType=VARCHAR}
          where id=#{id,jdbcType=INTEGER};
     </update>
-
 
 
 </mapper>
