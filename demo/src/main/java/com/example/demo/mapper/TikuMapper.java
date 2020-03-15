@@ -19,4 +19,6 @@ public interface TikuMapper {
     void addTiku(Tiku Tiku);
 
     int updateTiku(Tiku Tiku);
+
+    List<Tiku> findTikus(List ids);
 }

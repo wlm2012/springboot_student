@@ -18,6 +18,9 @@
             <if test="grade != null and grade !=''">
                 and grade= #{grade,jdbcType=VARCHAR}
             </if>
+            <if test="id != null and id !=''">
+                and id= #{id,jdbcType=INTEGER}
+            </if>
         </where>
     </select>
 
@@ -36,6 +39,16 @@
         update t_Tiku set question=#{question,jdbcType=VARCHAR},answer=#{answer,jdbcType=VARCHAR},answers=#{answers,jdbcType=VARCHAR}
         ,grade=#{grade,jdbcType=VARCHAR},kemu=#{kemu,jdbcType=VARCHAR} where id=#{id,jdbcType=INTEGER};
     </update>
+
+
+
+    <select id="findTikus" resultMap="BaseResultMap">
+        select * from t_Tiku
+        WHERE id IN
+        <foreach collection="list" item="id" index="index" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </select>
 
 
 </mapper>

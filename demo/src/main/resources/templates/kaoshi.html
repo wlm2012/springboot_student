@@ -5,19 +5,7 @@
     <link href="./left.css" type="text/css" rel="stylesheet"/>
     <title>学生列表</title>
     <div>
-        <form id="List">
-            年级：<input type="text" name="grade" size="20">
-            班级：<input type="text" name="clazz" size="20">
-            <input type="button" value="查询" onclick="lists()">
-            <br>
-        </form>
-        <form id="Add">
-            姓名：<input type="text" name="name" size="30">
-            年级：<input type="text" name="grade" size="2">
-            班级：<input type="text" name="clazz" size="3">
-            <input type="button" value="添加学生" onclick="Add()">
-            <br>
-        </form>
+
         <div id="updateForm"></div>
     </div>
 </head>
@@ -44,95 +32,81 @@
 </body>
 <script type="text/javascript"
         src="webjars/jquery/3.4.1/jquery.min.js"></script>
+
+
 <script>
-    function lists() {
+    function GetRequest() {
+        var url = location.search; //获取url中"?"符后的字串
+        if (url.indexOf("?") !== -1) {
+            var str = url.substr(1);
+        }
+        return str;
+    };
+
+    $(function () {
+        var req = GetRequest();
+        adds(req);
+    })
+
+
+    function adds(req) {
+        var shijuan_id = req.split("&")[0].split("=")[1];
+        var student_id = req.split("&")[1].split("=")[1];
         $.ajax({
             type: "POST",
-            url: "ListStudent",
-            data: $('#List').serialize(),
+            url: "ListShijuanTimu",
+            data: req,
             dataType: "json",//类型
             success: function (msg) {
-
-                var html = "<table id='myTable' border='1'><tr><td>姓名</td><td>年级</td><td>班级</td><td>修改</td><td>删除</td></tr>";
+                var html = "<form id='Results'>";
                 for (var i = 0; i < msg.length; i++) {    //遍历data数组
                     var ls = msg[i];
-                    html += "<tr  ><td>" + ls.name + "</td><td>" + ls.grade + "</td><td>" + ls.clazz + "</td><td><button onclick='updateForm(" + ls.id + "," + "\"" + ls.name + "\"," + ls.grade + "," + ls.clazz + ")'>修改</button></td><td><button onclick='deleteReg(" + ls.id + "," + i + ")'>删除</button></td>";
+                    html += ls.question + '<br>';
+                    html += "A<input type='radio' name='" + ls.id + "' value='A'>" + ls.answers[0] + "&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp" +
+                        "B<input type='radio' name='" + ls.id + "' value='B'>" + ls.answers[1] + "&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp" +
+                        "C<input type='radio' name='" + ls.id + "' value='C'>" + ls.answers[2] + "&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp" +
+                        "D<input type='radio' name='" + ls.id + "' value='D'>" + ls.answers[3] + "<br><br>";
                 }
-                html += "</tr></table>";
+                html += "<input type='button' value='提交试卷' onclick='Adds(" + student_id + "," + shijuan_id + ")'>";
                 $("#Result").html(html);
             },
             error: function () {
                 alert("加载资源失败");
             }
         });
+
     };
 
 
-    function deleteReg(id, i) {
-        $.ajax({
-            type: 'post',
-            url: 'DeleteStudent',
-            data: {
-                "id": id
-            },
-            success: function (data) {
-                if (data == "success") {
-                    alert("删除成功")
-                    document.getElementById('myTable').deleteRow(i + 1);//主要就是这个删除成功后移除这行数据
-                }
-            }
-
-        })
+    function splits(param) {
+        var strs = param.split("&");
+        var str = "[";
+        for (var i = 0; i < strs.length; i++) {
+            var id = strs[i].split("=")[0];
+            var answer = strs[i].split("=")[1];
+            str += "{\"id\":" + id + ",";
+            str += "\"answer\":\"" + answer + "\"},";
+        }
+        str = str.substring(0, str.length - 1);
+        str += "]";
+        return str;
     }
-</script>
-<script>
-    function Add() {
 
+
+    function Adds(student_id, shijuan_id) {
+        var strs = "{\"student_id\":" + student_id + "," + "\"shijuan_id\":" + shijuan_id + ",";
+        strs += "\"questionList\":" + splits($('#Results').serialize());
+        strs += "}";
+        console.log(strs)
         $.ajax({
             type: "POST",
-            url: "AddStudent",
-            data: $('#Add').serialize(),
+            url: "AddTikus",
+            data: strs,
             success: function (data) {
-                if (data == "success") {
-                    alert("添加成功");
-                }else {
-                    alert("添加失败");
-                }
-            },
-            error: function () {
-                alert("添加失败");
-            }
-        });
-    };
-
-</script>
-
-
-<script>
-    function updateForm(id, name, grade, clazz) {
-        var html = "<form id='Update'>" +
-            "<input type='hidden' name='id' value='" + id + "'>" +
-            "姓名：<input type='text' name='name' size='30' value='" + name + "'>" +
-            "年级：<input type='text' name='grade' size='2' value='" + grade + "'>" +
-            "班级：<input type='text' name='clazz' size='3' value='" + clazz + "'>" +
-            "<input type='button' value='编辑' onclick='Update()'>" +
-            "<br>" +
-            "</form>";
-
-        $("#updateForm").html(html);
-    };
-
-    function Update() {
-
-        $.ajax({
-            type: "POST",
-            url: "UpdateStudent",
-            data: $('#Update').serialize(),
-            success: function (data) {
-                if (data == "success") {
+                if (data === "success") {
                     alert("修改成功");
-                }else {
-                    alert("修改失败");
+                } else {
+                    alert(data);
                 }
             },
             error: function () {

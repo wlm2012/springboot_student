@@ -45,7 +45,7 @@
             success: function (data) {
                 if (data.length === 1) {
                     var myear = new Date();
-                    lists(data[0].grade, data[0].clazz, myear.getFullYear(),document.getElementsByName("id")[0].value)
+                    lists(data[0].grade, data[0].clazz, myear.getFullYear(), document.getElementsByName("id")[0].value)
                 } else {
                     alert("该学号不存在");
                 }
@@ -57,8 +57,7 @@
     }
 
 
-    function lists(grade, clazz, year,student_id) {
-        alert(student_id);
+    function lists(grade, clazz, year, student_id) {
         $.ajax({
             type: "POST",
             url: "ListShijuans",
@@ -66,7 +65,7 @@
                 "grade": grade,
                 "clazz": clazz,
                 "year": year,
-                "student_id":student_id
+                "student_id": student_id
             },
             dataType: "json",//类型
             success: function (msg) {
@@ -74,7 +73,7 @@
                 var html = "<table id='myTable' border='1'><tr><td>试卷名</td><td>年级</td><td>班级</td><td>科目</td><td>年</td><td>选择试卷</td></tr>";
                 for (var i = 0; i < msg.length; i++) {    //遍历data数组
                     var ls = msg[i];
-                    html += "<tr><td>" + ls.name + "</td><td>" + ls.grade + "</td><td>" + ls.clazz + "</td><td>" + ls.kemu + "</td><td>" + ls.year + "</td><td><a href='http://127.0.0.1:8080/addShijuan?id=" + ls.id + "'>选择试卷</td>";
+                    html += "<tr><td>" + ls.name + "</td><td>" + ls.grade + "</td><td>" + ls.clazz + "</td><td>" + ls.kemu + "</td><td>" + ls.year + "</td><td><a href='http://127.0.0.1:8080/kaoshi?id=" + ls.id + "&student_id="+student_id+"'>选择试卷</td>";
                 }
                 html += "</tr></table>";
                 $("#Result").html(html);

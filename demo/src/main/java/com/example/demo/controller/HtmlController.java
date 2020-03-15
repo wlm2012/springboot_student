@@ -57,6 +57,11 @@ public class HtmlController {
         return "index";
     }
 
+    @RequestMapping("/kaoshi")
+    public String kaoshi() {
+        return "kaoshi";
+    }
+
     @RequestMapping("/test")
     public String test() {
         return "test";

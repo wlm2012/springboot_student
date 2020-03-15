@@ -1,18 +1,18 @@
 package com.example.demo.controller;
 
 
-import com.example.demo.entity.Shijuan;
-import com.example.demo.entity.Student;
-import com.example.demo.entity.Timu;
-import com.example.demo.entity.Timus;
+import com.example.demo.entity.*;
 import com.example.demo.mapper.StudentMapper;
 import com.example.demo.service.ShijuanService;
 import com.example.demo.service.StudentService;
+import com.example.demo.service.TikuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -24,6 +24,9 @@ public class ShijuanController {
     @Autowired
     private ShijuanService ShijuanService;
 
+    @Autowired
+    private TikuService tikuService;
+
 
     @RequestMapping("/ListShijuan")
     public List<Shijuan> listShijuan(Shijuan shijuan) {
@@ -31,11 +34,28 @@ public class ShijuanController {
     }
 
     @RequestMapping("/ListShijuans")
-    public List<Shijuan> listShijuans(Shijuan shijuan,String student_id) {
-        System.out.println(student_id);
-        return ShijuanService.listShijuan(shijuan);
+    public List<Shijuan> listShijuans(Shijuan shijuan, String student_id) {
+
+        return ShijuanService.listShijuans(shijuan, student_id);
     }
 
+    @RequestMapping("/ListShijuanTimu")
+    public List<Question> listShijuanTimu(Shijuan shijuan) {
+
+        var shijuans = ShijuanService.listShijuan(shijuan);
+        String question_id = shijuans.get(0).getQuestion_id();
+        String[] question_ids = question_id.split(",");
+        var tikus = tikuService.listTikus(Arrays.asList(question_ids));
+        List<Question> list = new ArrayList<>();
+        for (Tiku tiku : tikus) {
+            Question question = new Question();
+            question.setId(tiku.getId());
+            question.setQuestion(tiku.getQuestion());
+            question.setAnswers(tiku.getAnswers().split(","));
+            list.add(question);
+        }
+        return list;
+    }
 
     @RequestMapping("/DeleteShijuan")
     public String deleteShijuan(int id) {

@@ -1,14 +1,15 @@
 package com.example.demo.controller;
 
 
-import com.example.demo.entity.Tiku;
+import com.example.demo.entity.*;
+import com.example.demo.mapper.ClazzMapper;
 import com.example.demo.service.TikuService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * @author wlm
@@ -18,6 +19,7 @@ public class TikuController {
 
     @Autowired
     private TikuService TikuService;
+
 
     @RequestMapping("/ListTiku")
     public List<Tiku> listTiku(Tiku tiku) {
@@ -38,6 +40,11 @@ public class TikuController {
     public String addTiku(Tiku Tiku) {
         String result = TikuService.addTiku(Tiku);
         return result;
+    }
+
+    @RequestMapping("/AddTikus")
+    public String addTikus(Questions questions) {
+        return TikuService.addTikus(questions);
     }
 
     @RequestMapping("/UpdateTiku")
