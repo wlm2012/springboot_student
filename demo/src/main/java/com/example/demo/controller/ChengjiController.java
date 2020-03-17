@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 
 import com.example.demo.entity.Chengji;
+import com.example.demo.entity.Chengjis;
 import com.example.demo.entity.Questions;
 import com.example.demo.service.ChengjiService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,8 +22,8 @@ public class ChengjiController {
     private ChengjiService ChengjiService;
 
     @RequestMapping("/ListChengji")
-    public List<Chengji> listChengji(Chengji chengji) {
-        return ChengjiService.listChengji(chengji);
+    public List<Chengji> listChengji(Chengjis chengjis) {
+        return ChengjiService.listChengji(chengjis);
     }
 
 

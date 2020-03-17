@@ -4,6 +4,7 @@ import com.example.demo.entity.Chengji;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author wlm
@@ -19,4 +20,6 @@ public interface ChengjiMapper {
     void addChengji(Chengji Chengji);
 
     int updateChengji(Chengji Chengji);
+
+    List<Chengji> findChengjis(Map<String, List> map);
 }

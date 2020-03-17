@@ -62,6 +62,11 @@ public class HtmlController {
         return "kaoshi";
     }
 
+    @RequestMapping("/listChengji")
+    public String chengji() {
+        return "listChengji";
+    }
+
     @RequestMapping("/test")
     public String test() {
         return "test";
