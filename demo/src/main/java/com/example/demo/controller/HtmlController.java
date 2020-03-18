@@ -63,8 +63,13 @@ public class HtmlController {
     }
 
     @RequestMapping("/listChengji")
-    public String chengji() {
+    public String listChengji() {
         return "listChengji";
+    }
+
+    @RequestMapping("/Chengji")
+    public String chengji() {
+        return "Chengji";
     }
 
     @RequestMapping("/test")

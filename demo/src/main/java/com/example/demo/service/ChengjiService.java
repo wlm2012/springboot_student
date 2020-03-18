@@ -1,9 +1,6 @@
 package com.example.demo.service;
 
-import com.example.demo.entity.Chengji;
-import com.example.demo.entity.Chengjis;
-import com.example.demo.entity.Clazz;
-import com.example.demo.entity.Shijuan;
+import com.example.demo.entity.*;
 import com.example.demo.mapper.ChengjiMapper;
 import com.example.demo.mapper.ClazzMapper;
 import com.example.demo.mapper.ShijuanMapper;
@@ -32,6 +29,9 @@ public class ChengjiService {
 
     @Autowired
     private ClazzMapper clazzMapper;
+
+    @Autowired
+    private StudentMapper studentMapper;
 
     public List<Chengji> listChengji(Chengjis chengjis) {
 
@@ -70,8 +70,29 @@ public class ChengjiService {
             list1.add(chengjis.getStudent_id());
             map.put("student_id", list1);
         }
+        var cjs = ChengjiMapper.findChengjis(map);
+        if (cjs.size() > 0) {
+            cjs.forEach(s -> {
+                var student_id = s.getStudent_id();
+                var student = new Student();
+                student.setId(student_id);
+                var students = studentMapper.findStudent(student);
+                if (students != null && students.size() > 0) {
+                    s.setClazz(students.get(0).getClazz());
+                    s.setStudent_name(students.get(0).getName());
+                    s.setGrade(students.get(0).getGrade());
+                }
 
-        return ChengjiMapper.findChengjis(map);
+                var shijuan_id = s.getShijuan_id();
+                var shijuan = new Shijuan();
+                shijuan.setId(shijuan_id);
+                var shijuanss = shijuanMapper.findShijuan(shijuan);
+                if (shijuanss != null && shijuanss.size() > 0) {
+                    s.setShijuan_name(shijuanss.get(0).getName());
+                }
+            });
+        }
+        return cjs;
     }
 
     public int deleteChengjiById(int id) {
