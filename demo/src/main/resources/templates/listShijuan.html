@@ -23,6 +23,12 @@
             <input type="button" value="添加试卷" onclick="Add()">
             <br>
         </form>
+        <select name="Addlist" form="Add">
+            <option value="volvo">Volvo</option>
+            <option value="saab">Saab</option>
+            <option value="opel">Opel</option>
+            <option value="audi">Audi</option>
+        </select>
         <div id="updateForm"></div>
         <br><br>
     </div>
@@ -54,7 +60,7 @@
 
 <script>
     function Add() {
-        window.location.href = "http://127.0.0.1:8080/addShijuan?"+$("#Add :input").serialize();
+        window.location.href = "http://127.0.0.1:8080/addShijuan?"+$("#Add").serialize();
     }
 
 </script>
