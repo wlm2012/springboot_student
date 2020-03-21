@@ -6,7 +6,6 @@ import com.example.demo.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -115,7 +114,7 @@ public class TikuService {
         var student_id = questions.getStudent_id();
         Student student = new Student();
         student.setId(student_id);
-        var students = studentMapper.findStudent(student);
+        // var students = studentMapper.findStudent(student);
         var clazz_id = clazzMapper.findClazz(student.getClazz(), student.getGrade()).get(0).getId();
         chengji.setClazz_id(clazz_id);
         chengjiMapper.addChengji(chengji);

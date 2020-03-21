@@ -2,12 +2,9 @@ package com.example.demo.controller;
 
 
 import com.example.demo.entity.*;
-import com.example.demo.mapper.StudentMapper;
 import com.example.demo.service.ShijuanService;
-import com.example.demo.service.StudentService;
 import com.example.demo.service.TikuService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
