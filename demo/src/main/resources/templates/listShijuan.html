@@ -8,8 +8,8 @@
     <div>
         <form id="List">
             试卷名：<input type="text" name="name" size="20">
-            年级：<input type="text" name="grade" size="10">
-            班级：<input type="text" name="clazz" size="10">
+            年级：<select id="listGrade" name="grade" form="List"></select>
+            班级：<select id="listClazz" name="clazz" form="List"></select>
             科目：<select id="listKemu" name="kemu" form="List"></select>
             年：<input type="text" name="year" size="10">
             <input type="button" value="查询" onclick="lists()">
@@ -17,8 +17,8 @@
         </form>
         <form id="Add">
             试卷名：<input type="text" name="name" size="20">
-            年级：<input type="text" name="grade" size="10">
-            班级：<input type="text" name="clazz" size="10">
+            年级：<select id="addGrade" name="grade" form="Add"></select>
+            班级：<select id="addClazz" name="clazz" form="Add"></select>
             科目：<select id="addKemu" name="kemu" form="Add"></select>
             年：<input type="text" name="year" size="10">
             <input type="button" value="添加试卷" onclick="Add()">
@@ -162,33 +162,52 @@
         })
 
 
-        for (var i = 0; i < 3; i++) {
-            console.log(i);
-        };
 
 
-
+        var arr = new Array();
+        var grades = new Set();
+        var clazzs = new Set();
 
 
         $.ajax({
             type: 'post',
             url: 'Listclazz',
             data: {},
+            // async:false,
             dataType: "json",
             success: function (data) {
                 for (let i = 0; i < data.length; i++) {
                     let element = data[i];
                     let clazz = element.clazz;
                     let grade = element.grade;
-                    let sel = $("#addKemu");
-                    let sel1 = $("#listKemu");
-                    sel.append("<option value='" + miaoshu + "'>" + miaoshu + "</option>");
-                    sel1.append("<option value='" + miaoshu + "'>" + miaoshu + "</option>");
+                    arr[i] = new Array();
+                    arr[i][0] = grade;
+                    arr[i][1] = clazz;
+                    grades.add(grade);
+                    clazzs.add(clazz);
+
                 }
+
+                for (let i of grades) {
+                    let listGrade = $("#listGrade");
+                    let addGrade = $("#addGrade");
+                    listGrade.append("<option value='" + i + "'>" + i + "</option>");
+                    addGrade.append("<option value='" + i + "'>" + i + "</option>");
+                }
+
+                for (let i of clazzs) {
+                    let listClazz = $("#listClazz");
+                    let addClazz = $("#addClazz");
+                    listClazz.append("<option value='" + i + "'>" + i + "</option>");
+                    addClazz.append("<option value='" + i + "'>" + i + "</option>");
+                }
+
             }
 
-        })
-    })
+        });
+    }
+
+    )
 
 </script>
 
