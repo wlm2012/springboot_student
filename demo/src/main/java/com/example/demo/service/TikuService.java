@@ -25,8 +25,8 @@ public class TikuService {
     @Autowired
     private ClazzMapper clazzMapper;
 
-    @Autowired
-    private StudentMapper studentMapper;
+    // @Autowired
+    // private StudentMapper studentMapper;
 
     @Autowired
     private ChengjiMapper chengjiMapper;
@@ -36,7 +36,7 @@ public class TikuService {
         return Tiku;
     }
 
-    public List<Tiku> listTikus(List list) {
+    public List<Tiku> listTikus(List<String> list) {
         var Tiku = TikuMapper.findTikus(list);
         return Tiku;
     }

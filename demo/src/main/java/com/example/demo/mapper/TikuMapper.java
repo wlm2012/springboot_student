@@ -20,5 +20,5 @@ public interface TikuMapper {
 
     int updateTiku(Tiku Tiku);
 
-    List<Tiku> findTikus(List ids);
+    List<Tiku> findTikus(List<String> ids);
 }
