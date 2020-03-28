@@ -1,16 +1,13 @@
 package com.example.demo.controller;
 
-
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-
 
 /**
  * @author wlm
  */
 @Controller
 public class HtmlController {
-
 
     @RequestMapping("/listStudent")
     public String listStudent() {
@@ -72,16 +69,20 @@ public class HtmlController {
         return "Chengji";
     }
 
+    @RequestMapping("/left")
+    public String left() {
+        return "left";
+    }
+
     @RequestMapping("/test")
     public String test() {
         return "test";
     }
 
-
-//    @RequestMapping("/modifyStudent")
-//    public ModelAndView addStudent(int id) {
-//        return new ModelAndView("redirect:/modifyStudent?id=" + id);
-//
-//    }
+    // @RequestMapping("/modifyStudent")
+    // public ModelAndView addStudent(int id) {
+    // return new ModelAndView("redirect:/modifyStudent?id=" + id);
+    //
+    // }
 
 }
