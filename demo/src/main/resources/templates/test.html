@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <link href="./left.css" type="text/css" rel="stylesheet"/>
+    <link href="./left.css" type="text/css" rel="stylesheet" />
     <title>添加试卷</title>
     <div>
         <a href="http://127.0.0.1:8080/listShijuan">返回</a>
@@ -14,30 +15,41 @@
         </form>
         <form id="AddShijuan">
             fdjkfnd<br>
-                    <input type="radio" name="1" value="A">
-                    <input type="radio" name="1" value="B">
-                    <input type="radio" name="1" value="C">
-                    <input type="radio" name="1" value="D">
+            <input type="radio" name="1" value="A">
+            <input type="radio" name="1" value="B">
+            <input type="radio" name="1" value="C">
+            <input type="radio" name="1" value="D">
             <input type="button" value="添加题目" onclick="Adds()">
         </form>
     </div>
 </head>
 
 <body>
-<div class="parent">
-    <div class="left">
-        <iframe src="left"  width="200" height="600"></iframe>
+    <div class="parent">
+        <div class="left">
+            <div class="include" file="left"></div>
+        </div>
+        <div class="right">
+            <p>
+                <div id="Result" style="margin: 0px 0 0px 5%;"></div>
+            </p>
+        </div>
     </div>
-    <div class="right">
-        <p>
-        <div id="Result" style="margin: 0px 0 0px 5%;"></div>
-        </p>
-    </div>
-</div>
 </body>
-<script type="text/javascript"
-        src="webjars/jquery/3.4.1/jquery.min.js"></script>
+<script type="text/javascript" src="webjars/jquery/3.4.1/jquery.min.js"></script>
 <script>
+
+
+    $(".include").each(function () {
+        if (!!$(this).attr("file")) {
+            var $includeObj = $(this);
+            $(this).load($(this).attr("file"), function (html) {
+                $includeObj.after(html).remove(); //加载的文件内容写入到当前标签后面并移除当前标签
+            })
+        }
+    });
+
+    
     function lists() {
         $.ajax({
             type: "POST",
@@ -65,7 +77,7 @@
     function Adds() {
 
         console.log($('#AddShijuan').serialize());
-        var jsons=formatArray($('#AddShijuan').serializeArray(),"json");
+        var jsons = formatArray($('#AddShijuan').serializeArray(), "json");
         console.log(jsons);
 
         function formatArray(array, type) {

@@ -1,34 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <link href="./left.css" type="text/css" rel="stylesheet"/>
+    <link href="./left.css" type="text/css" rel="stylesheet" />
     <title>首页</title>
 
 </head>
 
 <body>
-<div class="parent">
-    <div class="left">
-        <iframe src="left"  width="200" height="600"></iframe>
-    </div>
-    <div class="right">
-        <p>
-        <div>
-            <form id="List">
-                学号：<input type="text" name="id" size="20">
-                <input type="button" value="确定" onclick="Lists()">
-            </form>
+    <div class="parent">
+        <div class="left">
+            <div class="include" file="left"></div>
         </div>
-        </p>
-        <div id="Result" style="margin: 0px 0 0px 5%;"></div>
+        <div class="right">
+            <p>
+                <div>
+                    <form id="List">
+                        学号：<input type="text" name="id" size="20">
+                        <input type="button" value="确定" onclick="Lists()">
+                    </form>
+                </div>
+            </p>
+            <div id="Result" style="margin: 0px 0 0px 5%;"></div>
+        </div>
     </div>
-</div>
 </body>
-<script type="text/javascript"
-        src="webjars/jquery/3.4.1/jquery.min.js"></script>
+<script type="text/javascript" src="webjars/jquery/3.4.1/jquery.min.js"></script>
 
 <script>
+
+    $(".include").each(function () {
+        if (!!$(this).attr("file")) {
+            var $includeObj = $(this);
+            $(this).load($(this).attr("file"), function (html) {
+                $includeObj.after(html).remove(); //加载的文件内容写入到当前标签后面并移除当前标签
+            })
+        }
+    });
+
+    
     function Lists() {
         $.ajax({
             type: "POST",
@@ -65,7 +76,7 @@
                 var html = "<table id='myTable' border='1'><tr><td>试卷名</td><td>年级</td><td>班级</td><td>科目</td><td>年</td><td>选择试卷</td></tr>";
                 for (var i = 0; i < msg.length; i++) {    //遍历data数组
                     var ls = msg[i];
-                    html += "<tr><td>" + ls.name + "</td><td>" + ls.grade + "</td><td>" + ls.clazz + "</td><td>" + ls.kemu + "</td><td>" + ls.year + "</td><td><a href='http://127.0.0.1:8080/kaoshi?id=" + ls.id + "&student_id="+student_id+"'>选择试卷</td>";
+                    html += "<tr><td>" + ls.name + "</td><td>" + ls.grade + "</td><td>" + ls.clazz + "</td><td>" + ls.kemu + "</td><td>" + ls.year + "</td><td><a href='http://127.0.0.1:8080/kaoshi?id=" + ls.id + "&student_id=" + student_id + "'>选择试卷</td>";
                 }
                 html += "</tr></table>";
                 $("#Result").html(html);
