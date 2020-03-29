@@ -59,6 +59,7 @@ public class TeacherClazzService {
         teacherClazz.setKemu_id(kemu_id);
         teacherClazz.setClazz_id(clazz_id);
         teacherClazz.setTeacher_id(teacher_id);
+        teacherClazz.setFlag(teacher.getFlag());
         teacherClazzMapper.addTeacherClazz(teacherClazz);
 
     }
@@ -81,6 +82,7 @@ public class TeacherClazzService {
         teacherClazz.setId(Integer.valueOf(teacher.getKid()));
         teacherClazz.setKemu_id(kemu_id);
         teacherClazz.setClazz_id(clazz_id);
+        teacherClazz.setFlag(teacher.getFlag());
         return teacherClazzMapper.updateTeacherClazz(teacherClazz);
 
     }

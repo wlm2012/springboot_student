@@ -12,4 +12,5 @@ public class TeacherClazz {
     private int teacher_id;
     private int clazz_id;
     private int kemu_id;
+    private String flag;
 }

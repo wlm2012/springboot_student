@@ -40,7 +40,7 @@ public class ShijuanService {
         if (chengjis.size() > 0) {
             chengjis.forEach(x -> {
                 for (int i = shijuans.size() - 1; i >= 0; i--) {
-                    if (x.getStudent_id().equals(shijuans.get(i).getId())) {
+                    if (x.getShijuan_id().equals(shijuans.get(i).getId())) {
                         shijuans.remove(i);
                     }
                 }

@@ -79,12 +79,15 @@
                     if (ls.clazz == null) {
                         ls.clazz = '';
                     }
+                    if (ls.flag == null) {
+                        ls.flag = '';
+                    }
                     var clazz = ''
                     if (ls.grade !== '' && ls.clazz !== '') {
                         clazz = ls.grade + "年" + ls.clazz + "班";
                     }
 
-                    html += "<tr  ><td>" + ls.id + "</td><td>" + ls.name + "</td><td>" + clazz + "</td><td>" + ls.kemu + "</td><td>" + ls.flag + "</td><td><button onclick='updateForm(" + ls.id + ",\"" + ls.kid + "\",\"" + ls.name + "\"," + ls.grade + "," + ls.clazz + ",\"" + ls.kemu + "\"," + ls.flag + ")'>修改</button></td><td><button onclick='deleteReg(" + ls.kid + "," + i + ")'>删除</button></td><td><button onclick='updateForm(" + ls.id + ",\"" + '\t' + "\",\"" + ls.name + "\",\"" + '\t' + "\",\"" + '\t' + "\",\"" + '\t' + "\"," + ls.flag + ")'>添加</button></td>";
+                    html += "<tr  ><td>" + ls.id + "</td><td>" + ls.name + "</td><td>" + clazz + "</td><td>" + ls.kemu + "</td><td>" + ls.flag + "</td><td><button onclick='updateForm(" + ls.id + ",\"" + ls.kid + "\",\"" + ls.name + "\",\"" + ls.grade + "\",\"" + ls.clazz + "\",\"" + ls.kemu + "\",\"" + ls.flag + "\")'>修改</button></td><td><button onclick='deleteReg(" + ls.kid + "," + i + ")'>删除</button></td><td><button onclick='updateForm(" + ls.id + ",\"" + '\t' + "\",\"" + ls.name + "\",\"" + '\t' + "\",\"" + '\t' + "\",\"" + '\t' + "\",\"" + ls.flag + "\")'>添加</button></td>";
                 }
                 html += "</tr></table>";
                 $("#Result").html(html);
@@ -154,7 +157,7 @@
             "年级：<input type='text' name='grade' size='5' value='" + grade + "'>" +
             "班级：<input type='text' name='clazz' size='5' value='" + clazz + "'>" +
             "科目：<input type='text' name='kemu' size='20' value='" + kemu + "'>" +
-            "<input type='hidden' name='flag' size='2'  value='" + flag + "'>" +
+            "是否为班主任：<input type='text' name='flag' size='2'  value='" + flag + "'>" +
             "<input type='button' value='编辑' onclick='Update()'>" +
             "<br>" +
             "</form>";

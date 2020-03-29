@@ -35,8 +35,8 @@
     </update>
 
     <select id="listTeacher" resultMap="BaseResultMap">
-        select a.id,a.name,a.flag,b.id as kid ,b.grade,b.clazz,b.kemu from t_teacher a
-        left join (select a.id,a.teacher_id,b.grade,b.clazz,c.miaoshu as kemu from
+        select a.id,a.name,b.flag,b.id as kid ,b.grade,b.clazz,b.kemu from t_teacher a
+        left join (select a.id,a.teacher_id,a.flag,b.grade,b.clazz,c.miaoshu as kemu from
         t_teacher_clazz_kemu a, t_clazz b,t_kemu c where a.clazz_id=b.id and a.kemu_id=c.id) b
         on a.id=b.teacher_id
         <where>
@@ -50,7 +50,7 @@
                 and b.kemu = #{kemu,jdbcType=VARCHAR}
             </if>
             <if test="flag != null and flag !=''">
-                and a.flag= #{flag,jdbcType=VARCHAR}
+                and b.flag= #{flag,jdbcType=VARCHAR}
             </if>
             <if test="name != null and name !=''">
                 and a.name = #{name,jdbcType=VARCHAR}

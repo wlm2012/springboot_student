@@ -6,6 +6,7 @@
         <result column="teacher_id" property="teacher_id" jdbcType="INTEGER"/>
         <result column="clazz_id" property="clazz_id" jdbcType="INTEGER"/>
         <result column="kemu_id" property="kemu_id" jdbcType="INTEGER"/>
+        <result column="flag" property="flag" jdbcType="VARCHAR"/>
     </resultMap>
     <select id="findTeacherClazz" resultMap="BaseResultMap">
         select * from t_teacher_clazz_kemu
@@ -19,6 +20,9 @@
             <if test="kemu_id != null and kemu_id !=''">
                 and kemu_id= #{kemu_id,jdbcType=VARCHAR}
             </if>
+            <if test="flag != null and flag !=''">
+                and flag= #{flag,jdbcType=VARCHAR}
+            </if>
         </where>
     </select>
 
@@ -27,8 +31,9 @@
     </delete>
 
     <insert id="addTeacherClazz">
-        INSERT INTO t_teacher_clazz_kemu (teacher_id, clazz_id,kemu_id)
-        VALUES(#{teacher_id,jdbcType=VARCHAR}, #{clazz_id,jdbcType=VARCHAR}, #{kemu_id,jdbcType=VARCHAR});
+        INSERT INTO t_teacher_clazz_kemu (teacher_id, clazz_id,kemu_id,flag)
+        VALUES(#{teacher_id,jdbcType=VARCHAR}, #{clazz_id,jdbcType=VARCHAR}
+        , #{kemu_id,jdbcType=VARCHAR}, #{flag,jdbcType=VARCHAR});
 
     </insert>
 
@@ -39,7 +44,8 @@
         teacher_id=#{teacher_id,jdbcType=VARCHAR},
         </if>
         clazz_id=#{clazz_id,jdbcType=VARCHAR},
-        kemu_id=#{kemu_id,jdbcType=VARCHAR}
+        kemu_id=#{kemu_id,jdbcType=VARCHAR},
+        flag=#{flag,jdbcType=VARCHAR}
         where id=#{id,jdbcType=INTEGER};
     </update>
 
