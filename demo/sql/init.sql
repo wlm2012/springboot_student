@@ -19,8 +19,8 @@ CREATE TABLE `t_chengji`
 LOCK TABLES `t_chengji` WRITE;
 
 INSERT INTO `t_chengji`
-VALUES (1, ''1'', ''1'', NULL, NULL, ''70'', 2),
-       (6, ''1'', ''11'', NULL, NULL, ''0'', 2);
+VALUES (1, '1', '1', NULL, NULL, '70', 2),
+       (6, '1', '11', NULL, NULL, '0', 2);
 UNLOCK TABLES;
 
 
@@ -41,9 +41,9 @@ CREATE TABLE `t_clazz`
 LOCK TABLES `t_clazz` WRITE;
 
 INSERT INTO `t_clazz`
-VALUES (2, ''1'', ''2''),
-       (3, ''1'', ''3''),
-       (4, ''1'', ''4'');
+VALUES (2, '1', '2'),
+       (3, '1', '3'),
+       (4, '1', '4');
 
 UNLOCK TABLES;
 
@@ -64,9 +64,9 @@ CREATE TABLE `t_kemu`
 LOCK TABLES `t_kemu` WRITE;
 
 INSERT INTO `t_kemu`
-VALUES (3, ''c''),
-       (2, ''java''),
-       (4, ''python'');
+VALUES (3, 'c'),
+       (2, 'java'),
+       (4, 'python');
 UNLOCK TABLES;
 
 
@@ -92,8 +92,8 @@ CREATE TABLE `t_shijuan`
 
 LOCK TABLES `t_shijuan` WRITE;
 INSERT INTO `t_shijuan`
-VALUES (1, ''java'', ''2, 15 '', ''2'', ''1'', ''java'', ''2020''),
-       (11, ''第一次考试'', ''2, 16 '', ''2'', ''1'', ''java'', ''2020''),
+VALUES (1, 'java', '2, 15 ', '2', '1', 'java', '2020'),
+       (11, '第一次考试', '2, 16 ', '2', '1', 'java', '2020'),
        (17, NULL, NULL, NULL, NULL, NULL, NULL),
        (18, NULL, NULL, NULL, NULL, NULL, NULL),
        (19, NULL, NULL, NULL, NULL, NULL, NULL),
@@ -117,9 +117,9 @@ CREATE TABLE `t_student`
 
 LOCK TABLES `t_student` WRITE;
 INSERT INTO `t_student`
-VALUES (1, ''qqqqqqqqqqqq'', ''1'', ''2''),
-       (2, ''wwwwwwwwwwwwwwwwwww'', ''1'', ''1''),
-       (3, ''ee11'', ''1'', ''1'');
+VALUES (1, 'qqqqqqqqqqqq', '1', '2'),
+       (2, 'wwwwwwwwwwwwwwwwwww', '1', '1'),
+       (3, 'ee11', '1', '1');
 UNLOCK TABLES;
 
 
@@ -128,7 +128,7 @@ CREATE TABLE `t_teacher`
 (
     `id`   int(11) NOT NULL AUTO_INCREMENT,
     `name` varchar(40) DEFAULT NULL,
-    `flag` varchar(3)  DEFAULT '' 0 '',
+    `flag` varchar(3)  DEFAULT ' 0 ',
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB
   AUTO_INCREMENT = 7
@@ -137,9 +137,9 @@ CREATE TABLE `t_teacher`
 
 LOCK TABLES `t_teacher` WRITE;
 INSERT INTO `t_teacher`
-VALUES (1, ''bbb'', ''0''),
-       (4, ''nnn'', ''0''),
-       (5, ''ssss'', ''1'');
+VALUES (1, 'bbb', '0'),
+       (4, 'nnn', '0'),
+       (5, 'ssss', '1');
 UNLOCK TABLES;
 
 
@@ -206,8 +206,8 @@ CREATE TABLE `t_tiku`
 
 LOCK TABLES `t_tiku` WRITE;
 INSERT INTO `t_tiku`
-VALUES (2, ''dddddddd'', ''aa, bb, cc, dd '', ''D'', ''python'', ''1''),
-       (16, ''jjjd<br>fff<br>jjj'', ''aa, bb, cc, dd '', ''B'', ''c'', ''1''),
-       (20, ''dkalfei<br>'', ''aa, bb, cc, dd '', ''A'', ''python'', ''1''),
-       (21, ''ddkkdkd'', ''aa, bb, cc, dd '', ''A'', ''java'', ''1'');
+VALUES (2, 'dddddddd', 'aa, bb, cc, dd ', 'D', 'python', '1'),
+       (16, 'jjjd<br>fff<br>jjj', 'aa, bb, cc, dd ', 'B', 'c', '1'),
+       (20, 'dkalfei<br>', 'aa, bb, cc, dd ', 'A', 'python', '1'),
+       (21, 'ddkkdkd', 'aa, bb, cc, dd ', 'A', 'java', '1');
 UNLOCK TABLES;
