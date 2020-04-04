@@ -25,3 +25,11 @@ hs_err_pid*
 .idea/ 
 .mvn/ 
 *.iml
+
+.classpath
+.settings
+.vscode
+.vscode
+demo/target
+.project
+.factorypath
