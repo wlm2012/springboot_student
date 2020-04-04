@@ -4,19 +4,17 @@
 <head>
     <meta charset="UTF-8">
     <link href="./left.css" type="text/css" rel="stylesheet" />
-    <title>学生列表</title>
+    <title>教师列表</title>
     <div>
         <form id="List">
-            年级：<input type="text" name="grade" size="20">
-            班级：<input type="text" name="clazz" size="20">
+            教师编号：<input type="text" name="id" size="10">
+            姓名：<input type="text" name="name" size="30">
             <input type="button" value="查询" onclick="lists()">
             <br>
         </form>
         <form id="Add">
-            姓名：<input type="text" name="name" size="30">
-            年级：<input type="text" name="grade" size="2">
-            班级：<input type="text" name="clazz" size="3">
-            <input type="button" value="添加学生" onclick="Add()">
+            姓名：<input type="text" name="name" size="20">
+            <input type="button" value="添加老师" onclick="Add()">
             <br>
         </form>
         <div id="updateForm"></div>
@@ -52,15 +50,15 @@
     function lists() {
         $.ajax({
             type: "POST",
-            url: "ListStudent",
+            url: "ListTeacher",
             data: $('#List').serialize(),
             dataType: "json",//类型
             success: function (msg) {
 
-                var html = "<table id='myTable' border='1'><tr><td>姓名</td><td>年级</td><td>班级</td><td>修改</td><td>删除</td></tr>";
+                var html = "<table id='myTable' border='1'><tr><td>教师编号</td><td>姓名</td><td>修改</td><td>删除</td></tr>";
                 for (var i = 0; i < msg.length; i++) {    //遍历data数组
                     var ls = msg[i];
-                    html += "<tr  ><td>" + ls.name + "</td><td>" + ls.grade + "</td><td>" + ls.clazz + "</td><td><button onclick='updateForm(" + ls.id + "," + "\"" + ls.name + "\"," + ls.grade + "," + ls.clazz + ")'>修改</button></td><td><button onclick='deleteReg(" + ls.id + "," + i + ")'>删除</button></td>";
+                    html += "<tr  ><td>" + ls.id + "</td><td>" + ls.name + "</td><td><button onclick='updateForm(" + ls.id + ",\"" + ls.name  + ")'>修改</button></td><td><button onclick='deleteReg(" + ls.id + "," + i + ")'>删除</button></td>";
                 }
                 html += "</tr></table>";
                 $("#Result").html(html);
@@ -75,7 +73,7 @@
     function deleteReg(id, i) {
         $.ajax({
             type: 'post',
-            url: 'DeleteStudent',
+            url: 'DeleteTeacher',
             data: {
                 "id": id
             },
@@ -94,13 +92,13 @@
 
         $.ajax({
             type: "POST",
-            url: "AddStudent",
+            url: "AddTeacher",
             data: $('#Add').serialize(),
             success: function (data) {
                 if (data == "success") {
                     alert("添加成功");
                 } else {
-                    alert("添加失败");
+                    alert(data);
                 }
             },
             error: function () {
@@ -113,12 +111,10 @@
 
 
 <script>
-    function updateForm(id, name, grade, clazz) {
+    function updateForm(id, name) {
         var html = "<form id='Update'>" +
             "<input type='hidden' name='id' value='" + id + "'>" +
-            "姓名：<input type='text' name='name' size='30' value='" + name + "'>" +
-            "年级：<input type='text' name='grade' size='2' value='" + grade + "'>" +
-            "班级：<input type='text' name='clazz' size='3' value='" + clazz + "'>" +
+            "姓名：<input type='text' name='name' size='20' value='" + name + "'>" +
             "<input type='button' value='编辑' onclick='Update()'>" +
             "<br>" +
             "</form>";
@@ -130,13 +126,13 @@
 
         $.ajax({
             type: "POST",
-            url: "UpdateStudent",
+            url: "UpdateTeacher",
             data: $('#Update').serialize(),
             success: function (data) {
                 if (data == "success") {
                     alert("修改成功");
                 } else {
-                    alert("修改失败");
+                    alert(data);
                 }
             },
             error: function () {

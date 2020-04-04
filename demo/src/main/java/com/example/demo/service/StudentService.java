@@ -5,7 +5,7 @@ import com.example.demo.mapper.StudentMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
+
 import java.util.List;
 
 /**
@@ -18,16 +18,20 @@ public class StudentService {
     @Autowired
     private StudentMapper studentMapper;
 
-    public List<Student> listStudent(String clazz, String grade) {
-        var student = studentMapper.findStudentByClazz(clazz,grade);
-        return student;
+    public List<Student> listStudent(Student student) {
+        var students = studentMapper.findStudent(student);
+        return students;
     }
 
     public int deleteStudentById(int id) {
         return studentMapper.deleteStudentById(id);
     }
 
-    public void insertStudent(Student student){
-        studentMapper.insertStudent(student);
+    public void addStudent(Student student) {
+        studentMapper.addStudent(student);
+    }
+
+    public int updateStudent(Student student) {
+        return studentMapper.updateStudent(student);
     }
 }

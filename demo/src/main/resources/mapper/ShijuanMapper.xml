@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.demo.mapper.ShijuanMapper">
+    <resultMap id="BaseResultMap" type="com.example.demo.entity.Shijuan">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="question_id" property="question_id" jdbcType="VARCHAR"/>
+        <result column="grade" property="grade" jdbcType="VARCHAR"/>
+        <result column="clazz" property="clazz" jdbcType="VARCHAR"/>
+        <result column="kemu" property="kemu" jdbcType="VARCHAR"/>
+        <result column="year" property="year" jdbcType="VARCHAR"/>
+    </resultMap>
+    <select id="findShijuan" resultMap="BaseResultMap">
+        select * from t_Shijuan
+        <where>
+            <if test="id != null and id !=''">
+                and id = #{id,jdbcType=INTEGER}
+            </if>
+            <if test="clazz != null and clazz !=''">
+                and clazz = #{clazz,jdbcType=VARCHAR}
+            </if>
+            <if test="grade != null and grade !=''">
+                and grade= #{grade,jdbcType=VARCHAR}
+            </if>
+            <if test="kemu != null and kemu !=''">
+                and kemu= #{kemu,jdbcType=VARCHAR}
+            </if>
+            <if test="year != null and year !=''">
+                and year= #{year,jdbcType=VARCHAR}
+            </if>
+        </where>
+    </select>
+
+    <delete id="deleteShijuanById" parameterType="int">
+        delete from t_Shijuan where id = #{id,jdbcType=INTEGER};
+    </delete>
+
+    <insert id="addShijuan" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO t_shijuan
+        (name, question_id, clazz, grade, kemu)
+        VALUES( #{name,jdbcType=VARCHAR}, #{question_id,jdbcType=VARCHAR},
+        #{clazz,jdbcType=VARCHAR}, #{grade,jdbcType=VARCHAR}, #{kemu,jdbcType=VARCHAR});
+
+    </insert>
+
+
+    <update id="updateShijuan">
+        update t_Shijuan
+        <set>
+            <if test="name != null and name !=''">
+                name=#{name,jdbcType=VARCHAR},
+            </if>
+            <if test="question_id != null and question_id !=''">
+                question_id=#{question_id,jdbcType=VARCHAR},
+            </if>
+            <if test="grade != null and grade !=''">
+                grade=#{grade,jdbcType=VARCHAR},
+            </if>
+            <if test="clazz != null and clazz !=''">
+                clazz=#{clazz,jdbcType=VARCHAR},
+            </if>
+            <if test="kemu != null and kemu !=''">
+                kemu=#{kemu,jdbcType=VARCHAR},
+            </if>
+            <if test="year != null and year !=''">
+                year=#{year,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id=#{id,jdbcType=INTEGER};
+    </update>
+
+
+</mapper>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.demo.mapper.TikuMapper">
+    <resultMap id="BaseResultMap" type="com.example.demo.entity.Tiku">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="question" property="question" jdbcType="VARCHAR"/>
+        <result column="answers" property="answers" jdbcType="VARCHAR"/>
+        <result column="answer" property="answer" jdbcType="VARCHAR"/>
+        <result column="grade" property="grade" jdbcType="VARCHAR"/>
+        <result column="kemu" property="kemu" jdbcType="VARCHAR"/>
+    </resultMap>
+    <select id="findTiku" resultMap="BaseResultMap">
+        select * from t_Tiku
+        <where>
+            <if test="kemu != null and kemu !=''">
+                and kemu = #{kemu,jdbcType=VARCHAR}
+            </if>
+            <if test="grade != null and grade !=''">
+                and grade= #{grade,jdbcType=VARCHAR}
+            </if>
+            <if test="id != null and id !=''">
+                and id= #{id,jdbcType=INTEGER}
+            </if>
+        </where>
+    </select>
+
+    <delete id="deleteTikuById" parameterType="int">
+        delete from t_Tiku where id = #{id,jdbcType=INTEGER};
+    </delete>
+
+    <insert id="addTiku">
+        INSERT INTO t_Tiku (question,answers,answer, grade, kemu)
+        VALUES(#{question,jdbcType=VARCHAR},#{answers,jdbcType=VARCHAR},#{answer,jdbcType=VARCHAR}, #{grade,jdbcType=VARCHAR}, #{kemu,jdbcType=VARCHAR});
+
+    </insert>
+
+
+    <update id="updateTiku">
+        update t_Tiku set question=#{question,jdbcType=VARCHAR},answer=#{answer,jdbcType=VARCHAR},answers=#{answers,jdbcType=VARCHAR}
+        ,grade=#{grade,jdbcType=VARCHAR},kemu=#{kemu,jdbcType=VARCHAR} where id=#{id,jdbcType=INTEGER};
+    </update>
+
+
+
+    <select id="findTikus" resultMap="BaseResultMap">
+        select * from t_Tiku
+        WHERE id IN
+        <foreach collection="list" item="id" index="index" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </select>
+
+
+</mapper>

@@ -12,9 +12,11 @@ import java.util.List;
 @Mapper
 public interface StudentMapper {
 
-    List<Student> findStudentByClazz(String clazz,String grade);
+    List<Student> findStudent(Student student);
 
     int deleteStudentById(int id);
 
-    void insertStudent(Student student);
+    void addStudent(Student student);
+
+    int updateStudent(Student student);
 }

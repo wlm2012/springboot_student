@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.demo.mapper.ChengjiMapper">
+    <resultMap id="BaseResultMap" type="com.example.demo.entity.Chengji">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="student_id" property="student_id" jdbcType="VARCHAR"/>
+        <result column="shijuan_id" property="shijuan_id" jdbcType="VARCHAR"/>
+        <result column="stat" property="stat" jdbcType="VARCHAR"/>
+        <result column="answer" property="answer" jdbcType="VARCHAR"/>
+        <result column="result" property="result" jdbcType="VARCHAR"/>
+        <result column="clazz_id" property="clazz_id" jdbcType="INTEGER"/>
+    </resultMap>
+    <select id="findChengji" resultMap="BaseResultMap">
+        select * from t_Chengji
+        <where>
+            <if test="id != null and id !=''">
+                and id = #{id,jdbcType=INTEGER}
+            </if>
+            <if test="student_id != null and student_id !=''">
+                and student_id = #{student_id,jdbcType=VARCHAR}
+            </if>
+            <if test="shijuan_id != null and shijuan_id !=''">
+                and shijuan_id = #{shijuan_id,jdbcType=VARCHAR}
+            </if>
+            <if test="clazz_id != null and clazz_id !=''">
+                and clazz_id = #{clazz_id,jdbcType=INTEGER}
+            </if>
+        </where>
+    </select>
+
+    <delete id="deleteChengjiById" parameterType="int">
+        delete from t_Chengji where id = #{id,jdbcType=INTEGER};
+    </delete>
+
+    <insert id="addChengji">
+        INSERT INTO t_Chengji (student_id,shijuan_id,result,clazz_id)
+        VALUES( #{student_id,jdbcType=VARCHAR}, #{shijuan_id,jdbcType=VARCHAR},
+        #{result,jdbcType=VARCHAR}, #{clazz_id,jdbcType=VARCHAR});
+
+    </insert>
+
+
+    <update id="updateChengji">
+        update t_Chengji set miaoshu=#{miaoshu,jdbcType=VARCHAR}
+         where id=#{id,jdbcType=INTEGER};
+    </update>
+
+
+    <select id="findChengjis" resultMap="BaseResultMap">
+        select * from t_Chengji
+        where 1=1
+        <if test="student_id != null and student_id.size()>0">
+            and student_id in
+            <foreach collection="student_id" index="index" item="item" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </if>
+        <if test="shijuan_id!= null and shijuan_id.size()>0 ">
+            and shijuan_id in
+            <foreach collection="shijuan_id" index="index" item="item" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </if>
+        <if test="clazz_id!= null and clazz_id.size()>0">
+            and clazz_id in
+            <foreach collection="clazz_id" index="index" item="item" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </if>
+    </select>
+
+</mapper>

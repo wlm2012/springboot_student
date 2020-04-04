@@ -26,10 +26,14 @@ hs_err_pid*
 .mvn/ 
 *.iml
 
+
 .classpath
 .settings
 .vscode
 .vscode
 demo/target
-.project
 .factorypath
+target/
+.settings/
+.project
+

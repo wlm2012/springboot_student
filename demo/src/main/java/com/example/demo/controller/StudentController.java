@@ -4,7 +4,6 @@ package com.example.demo.controller;
 import com.example.demo.entity.Student;
 import com.example.demo.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -20,8 +19,8 @@ public class StudentController {
     private StudentService studentService;
 
     @RequestMapping("/ListStudent")
-    public List<Student> listStudent(String clazz, String grade) {
-        return studentService.listStudent(clazz, grade);
+    public List<Student> listStudent(Student student) {
+        return studentService.listStudent(student);
     }
 
 
@@ -35,9 +34,18 @@ public class StudentController {
     }
 
     @RequestMapping("/AddStudent")
-    public String insertStudent(Student student){
-        studentService.insertStudent(student);
+    public String addStudent(Student student) {
+        studentService.addStudent(student);
         return "success";
+    }
+
+    @RequestMapping("/UpdateStudent")
+    public String updateStudent(Student student) {
+        int result = studentService.updateStudent(student);
+        if (1 == result) {
+            return "success";
+        }
+        return "fail";
     }
 
 
