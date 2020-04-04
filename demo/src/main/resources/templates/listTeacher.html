@@ -58,7 +58,7 @@
                 var html = "<table id='myTable' border='1'><tr><td>教师编号</td><td>姓名</td><td>修改</td><td>删除</td></tr>";
                 for (var i = 0; i < msg.length; i++) {    //遍历data数组
                     var ls = msg[i];
-                    html += "<tr  ><td>" + ls.id + "</td><td>" + ls.name + "</td><td><button onclick='updateForm(" + ls.id + ",\"" + ls.name  + ")'>修改</button></td><td><button onclick='deleteReg(" + ls.id + "," + i + ")'>删除</button></td>";
+                    html += "<tr  ><td>" + ls.id + "</td><td>" + ls.name + "</td><td><button onclick='updateForm(" + ls.id + ",\"" + ls.name  + "\")'>修改</button></td><td><button onclick='deleteReg(" + ls.id + "," + i + ")'>删除</button></td>";
                 }
                 html += "</tr></table>";
                 $("#Result").html(html);
