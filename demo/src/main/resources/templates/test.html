@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
+<!-- <head>
     <meta charset="UTF-8">
     <link href="./left.css" type="text/css" rel="stylesheet" />
     <title>添加试卷</title>
@@ -114,7 +114,16 @@
             }
         });
     };
-</script>
+</script> -->
+
+
+<ul id="purchases">difdf
+    <li>A tin of beans</li>
+    <li class="sale">Cheese</li>
+    <li class="sale important">Milk</li>
+</ul>
+
+<script type="text/javascript" src="../static/jquery-3.4.1.js"></script>
 
 <script>
 
@@ -122,6 +131,7 @@
         var len={name:"wlm",year:1992,sex:true};
         console.log(len.name);
         console.log(len.year);
+        console.log(document.getElementById("purchases").getElementsByClassName("sale").length);  //2
         
         
         
