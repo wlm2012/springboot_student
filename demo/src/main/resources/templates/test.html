@@ -127,11 +127,13 @@
 
 <script>
 
-    $(function name() {
+    $(function start() {
         var len={name:"wlm",year:1992,sex:true};
         console.log(len.name);
         console.log(len.year);
         console.log(document.getElementById("purchases").getElementsByClassName("sale").length);  //2
+        document.getElementById("purchases").setAttribute("title","jjjjj");
+        console.log(document.getElementById("purchases").getAttribute("title"));
         
         
         
